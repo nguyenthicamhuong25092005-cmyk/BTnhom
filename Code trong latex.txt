@@ -1,0 +1,1442 @@
+\documentclass[12pt,a4paper,oneside]{book}
+\usepackage[utf8]{vietnam}
+\usepackage{amsmath, amsthm, amssymb,latexsym,amscd,amsfonts,enumerate,titlesec,titletoc}
+\usepackage[top=3.0cm, bottom=3.0cm, left=3cm, right=2.5cm]{geometry}
+% căn lề theo quy chuẩn KLTN
+\usepackage{color, fancyhdr, graphicx, wrapfig}
+\usepackage[unicode]{hyperref}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{array}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, shadows}
+%\newtheorem{example}{Ví dụ}[section]
+\def\chaptertitlename{\fontsize{14pt}{14pt}\selectfont{CHƯƠNG}}
+\titleformat{\chapter}[display]
+{\vspace{-2cm}\normalfont\Large\filcenter\bfseries}
+{{{\chaptertitlename\,}\thechapter}} {0pc}{{}\MakeUppercase}
+\theoremstyle{theorem}
+\newtheorem{theorem}{Định lý}[section]
+\theoremstyle{definition}
+\newtheorem{theorem2}{Định nghĩa}[section]
+\newtheorem{dn}[theorem2]{Định nghĩa}
+\newtheorem{nx}[theorem2]{Nhận xét}
+\newtheorem{vd}[theorem2]{Ví dụ}
+\newtheorem{md}[theorem2]{Mệnh đề}
+\newtheorem{tc}[theorem2]{Tính chất}
+\newtheorem{bd}[theorem2]{Bổ đề} 
+\newtheorem{dl}[theorem2]{Định lý}
+\newtheorem{bt}[theorem2]{Bài toán}
+\newtheorem{hq}[theorem2]{Hệ quả}
+\newtheorem{cy}[theorem2]{Chú ý}
+%\newtheorem{example}{Ví dụ}[section]
+%\newtheorem{proposition}{Mệnh đề}[section]
+%\newtheorem{definition}[proposition]{Định nghĩa}
+%\newtheorem{remark}[proposition]{Nhận xét}
+%\newtheorem{theorem}[proposition]{Định lý}
+%\newtheorem{example}[proposition]{Ví dụ}
+%\newtheorem{corollary}[proposition]{Hệ quả}
+%\newtheorem{lemma}[proposition]{Bổ đề}
+\newtheorem{Theorem}{Theorem}[section]
+\newtheorem{Proposition}[Theorem]{Proposition}
+\newtheorem{Remark}[Theorem]{Remark}
+\newtheorem{Lemma}[Theorem]{Lemma}
+\newtheorem{Corollary}[Theorem]{Corollary}
+\newtheorem{Definition}[Theorem]{Definition}
+\newtheorem{Example}[Theorem]{Example}
+\newcommand{\br}[1]{\left(#1\right)} %ngoặc tròn
+\newcommand{\brb}[1]{\left\{#1\right\}} %ngoặc nhọn, tập hợp
+\newcommand{\brc}[1]{\left[#1\right]} %ngoặc vuông
+\newcommand{\bao}[1]{\left<#1\right>} 
+\newcommand{\tri}[1]{\left|#1\right|}
+\newcommand{\flo}[1]{ \left \lfloor #1 \right \rfloor}
+\newtheorem*{case1}{Trường hợp 1}
+\newtheorem*{case2}{Trường hợp 2}
+\newtheorem*{case3}{Trường hợp 3}
+\newcommand{\aut}[1]{\mbox{Aut}\br{#1}}
+\newcommand{\gal}[1]{\mbox{Gal}\br{#1}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+
+
+
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+\normalsize
+\pagestyle{fancy}
+\makeatletter
+\renewcommand{\ps@plain}{
+	\renewcommand{\@oddfoot}{\textrm{\centerline{\thepage}}}
+	\renewcommand{\@evenfoot}{\@oddfoot}
+	\renewcommand{\@oddhead}{}
+	\renewcommand{\@evenhead}{\@oddhead}}
+\pagestyle{plain}
+
+  \usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+
+%%%%%%%%%%%%%%%%%
+\begin{document}
+	\fontsize{13pt}{18pt}\selectfont % Lệnh thay đổi cỡ chữ thành cỡ 14, cỡ dòng 18 (theo quy chuẩn của Khóa Luận TN).
+	\setlength{\baselineskip}{26truept}
+	%\fontsize{13pt}{14pt}\selectfont
+	\pagenumbering{arabic}
+	%\pagenumbering{roman}
+	%\frontmatter
+	\pagestyle{empty}
+	\begin{titlepage}
+		\begin{tikzpicture}[remember picture,overlay,inner sep=0,outer sep=0]
+			\draw[black,line width=3pt] ([xshift=-1.5cm,yshift=-2cm]current page.north east) coordinate (A)--([xshift=2.5cm,yshift=-2cm]current page.north west) coordinate(B)--([xshift=2.5cm,yshift=2cm]current page.south west) coordinate (C)--([xshift=-1.5cm,yshift=2cm]current page.south east) coordinate(D)--cycle;
+			
+			\draw[black,line width=1pt] ([xshift=-1.7cm,yshift=-2.2cm]current page.north east) coordinate (A)--([xshift=2.7cm,yshift=-2.2cm]current page.north west) coordinate(B)--([xshift=2.7cm,yshift=2.2cm]current page.south west) coordinate (C)--([xshift=-1.7cm,yshift=2.2cm]current page.south east) coordinate(D)--cycle;
+
+
+		\end{tikzpicture}
+		\begin{center}
+			\vspace{-1cm}\textbf{TRƯỜNG ĐẠI HỌC SƯ PHẠM HUẾ}
+			
+			\vspace{7pt}
+			\bf\underline{KHOA TOÁN HỌC}
+		\end{center}
+		\vspace{10pt}
+        \begin{center}
+        \includegraphics[width=0.3\textwidth]{logo trường.png}
+        \end{center}
+		\begin{center}
+			
+			\vspace{1cm}
+			\fontsize{15pt}{13pt}\selectfont 
+			\textbf{TÍCH HỢP CNTT TRONG DẠY HỌC TOÁN} 
+			
+			\vspace{16pt}
+			
+		\end{center}
+		\vspace{0.5cm}
+		\begin{center}
+			\fontsize{18pt}{17pt}\selectfont 
+			\hspace{-0.4cm}\bf\fontsize{21pt}{21}\selectfont  Ứng dụng thư viện SymPy và Matplotlib 3D để tính thể tích bằng tích phân và trực quan hoá hình ảnh
+		\end{center}	
+		
+		\vspace{0.5cm}
+        \begin{center}
+            {\fontsize{13pt}{16}\selectfont Nhóm sinh viên thực hiện:} \\[0.3cm]
+    {\bfseries\fontsize{13pt}{16}\selectfont Phạm Phương Linh} \\
+    {\bfseries\fontsize{13pt}{16}\selectfont Hoàng Ngọc Hùng} \\
+     {\bfseries\fontsize{13pt}{16}\selectfont Nguyễn Thị Cẩm Hương} \\
+    {\bfseries\fontsize{13pt}{16}\selectfont Đặng Thanh Quý}
+    
+        \end{center}
+    
+		\vfill
+		\centerline {\bf Huế, 10/2026}
+	\end{titlepage}
+	
+	
+	
+	\fontsize{13pt}{18pt}\selectfont % Lệnh thay đổi cỡ chữ thành cỡ 14, cỡ dòng 18 (theo quy chuẩn của Khóa Luận TN).
+	\setlength{\baselineskip}{26truept}
+	%\fontsize{13pt}{14pt}\selectfont
+	\pagenumbering{arabic}
+	%\pagenumbering{roman}
+	%\frontmatter
+	\pagestyle{empty}
+	
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!50!black},
+    stringstyle=\color{red!70!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=8pt,
+    frame=single,
+    breaklines=true,
+    showstringspaces=false,
+    tabsize=4
+}
+
+	
+	\begin{titlepage}
+		\centerline{ \bf TRƯỜNG ĐẠI HỌC SƯ PHẠM}
+		\centerline{\bf\underline{KHOA TOÁN HỌC}}
+		%\centerline{\bf KHOA TOÁN }
+		\vspace*{3.0cm}
+		\vspace*{3cm}
+        \centerline{\bf\fontsize{17pt}{18}\selectfont  TÍCH HỢP CNTT TRONG DẠY HỌC TOÁN}
+        \vspace{2.5cm}
+		\begin{center}
+			\fontsize{18pt}{17pt}\selectfont 
+			\bf\fontsize{21pt}{21}\selectfont Ứng dụng thư viện SymPy \& Matplotlib 3D để tính thể tích bằng tích phân và trực quan hoá hình ảnh
+		\end{center}	
+		
+		\vspace*{1cm}
+        \centerline{\bf\fontsize{15pt}{18}\selectfont {Giảng viên hướng dẫn}}
+
+		\centerline{\bf\fontsize{16pt}{18}\selectfont {TS NGUYỄN ĐĂNG MINH PHÚC}}
+		
+		%\hspace{8cm}\parbox{7cm}{}
+		%\vspace*{2.5cm}
+		\vfill
+		
+		\centerline{\bf Huế, 10/2026}
+	\end{titlepage}
+	\newpage
+	\newpage
+	
+	
+	%\setcounter{page}{3}
+	%%%%%%%%%%%%%%%%%%%%%%%
+	%\pagenumbering{roman}
+	\markboth{{\it Mục lục}}{{\it Mục lục}}
+	%\addcontentsline{toc}{section}{{\bf Mục lục\rm }}
+	%\cleardoublepage
+	
+	%{\protect\thispagestyle{empty}}
+	%%%%%%%%%%%%%%
+	%\include{Loicamdoan}
+	%\pagenumbering{arabic}
+	% \pagestyle{headings}
+	\newpage
+	\newpage
+	\def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
+		\if@mainmatter
+		\refstepcounter{chapter}%
+		\typeout{\@chapapp\space\thechapter.}%
+		\addcontentsline{toc}{chapter}%
+		{\bf  Chương \protect\numberline{\thechapter. } #1}%
+		\else
+		\addcontentsline{toc}{chapter}{ #1}%
+		\fi
+		\else
+		\addcontentsline{toc}{chapter}{ #1}%
+		\fi
+		\chaptermark{#1}%
+		\addtocontents{lof}{\protect\addvspace{10\p@}}%
+		\addtocontents{lot}{\protect\addvspace{10\p@}}%
+		\if@twocolumn
+		\@topnewpage[\@makechapterhead{#2}]%
+		\else
+		\@makechapterhead{#2}%
+		\@afterheading
+		\fi}
+	%\setcounter{page}{3}
+	%%%%%%%%%%%%%%%%%%%%%%%
+	%\pagenumbering{roman}
+	\markboth{{\it Mục lục}}{{\it Mục lục}}
+	\tableofcontents
+	% Đây này
+	\pagestyle{plain}
+	\chapter*{LỜI CẢM ƠN}
+	\fontsize{13pt}{22pt} \selectfont
+Lời đầu tiên, chúng em xin bày tỏ lòng biết ơn chân thành đến thầy TS. Nguyễn Đăng Minh Phúc – người đã trực tiếp tận tình hướng dẫn, định hướng chuyên môn và đóng góp nhiều ý kiến quý báu cho chúng em trong suốt quá trình nghiên cứu, hoàn thành đề tài tiểu luận \textbf{ Ứng dụng thư viện SymPy và Matplotlib 3D để tính thể tích bằng tích phân và trực quan hoá hình ảnh}. Sự hướng dẫn của thầy đã giúp nhóm tháo gỡ nhiều khó khăn trong việc ứng dụng thư viện SymPy và Matplotlib 3D để tính toán tích phân, xử lý các bài toán thể tích bằng tích phân đồng thời giúp trực quan hoá hình ảnh trong không gian 3D
+
+Chúng em cũng xin gửi lời cảm ơn đến Quý thầy cô trong Khoa Toán đã truyền đạt những kiến thức nền tảng và tạo điều kiện tốt cho chúng em trong quá trình học tập, nghiên cứu.
+
+Đồng thời, nhóm tác giả xin cảm ơn các bạn sinh viên đã đồng hành, trao đổi và góp ý để nội dung tiểu luận được hoàn thiện hơn.
+
+Dù đã cố gắng trong quá trình tìm hiểu và thực hiện, song do hạn chế về kinh nghiệm nghiên cứu và kinh nghiệm ứng dụng thư viện Sympy và Matplotlib 3D, đề tài khó tránh khỏi những thiếu sót. Chúng em rất mong nhận được những ý kiến đóng góp từ thầy giáo hướng dẫn và Quý thầy cô để đề tài của nhóm được hoàn thiện hơn.
+
+Chúng em xin chân thành cảm ơn!
+	
+	\begin{flushright}
+		Huế, tháng 10 năm 2026
+		\vspace{0.5cm}
+        
+		\textit{Nhóm thực hiện.}
+       
+        \textit{Phạm Phương Linh}
+
+        \textit{Hoàng Ngọc Hùng}
+
+        \textit{Nguyễn Thị Cẩm Hương}
+
+        \textit{Đặng Thanh Quý}
+	\end{flushright}
+	
+	
+	
+	\addcontentsline{toc}{chapter}{LỜI CẢM ƠN}
+	
+	
+	\chapter*{MỞ ĐẦU}
+	\addcontentsline{toc}{chapter}{PHẦN MỞ ĐẦU}
+
+        Hiện nay, quỹ thời gian định mức dành cho môn Toán ở trường phổ thông là 4 tiết/tuần cho thấy sự quan trọng của môn Toán. Trong đó, Giải tích là mảng kiến thức trọng tâm. Đặc biệt ở các bài toán ứng dụng tích phân, tính thể tích vật thể tròn xoay, việc minh họa thủ công trên bảng phấn các đồ thị cong phức tạp (như đường sin, parabol) thường mất từ 5 đến 10 phút của một tiết học.Sự hạn chế về thời gian này khiến học sinh gặp khó khăn khi tiếp cận bài toán do bị thiếu hụt thời gian thực hành, kết hợp với các phép tính đại số phức tạp và khó khăn trong tư duy hình học không gian.
+        
+        Lấy cảm hứng từ hướng giải quyết trong bài báo \textit{Ứng dụng công nghệ in 3D hỗ trợ dạy học chủ đề Thể tích khối tròn xoay} (Tạp chí Giáo dục, số 1112) của thầy Nguyễn Đăng Minh Phúc và cô Phạm Thị Mỹ Nhân, chúng em nhận thấy sự can thiệp của công nghệ trực quan là giải pháp cốt lõi để bù đắp sự thiếu hụt về thời gian giảng dạy. 
+        
+        Tuy nhiên, thay vì sử dụng mô hình in 3D vật lý mất nhiều thời gian chế tác, đề tài \textbf{ Ứng dụng thư viện SymPy \& Matplotlib 3D để tính thể tích bằng tích phân và trực quan hoá hình ảnh} tiếp cận bằng ngôn ngữ lập trình Python. Sự kết hợp giữa thư viện tính toán ký hiệu SymPy và thư viện đồ họa Matplotlib 3D cho phép tự động hóa hoàn toàn quá trình giải tích phân, đồng thời ngay lập tức xuất ra các mô hình 3D động có thể xoay đa chiều trên màn hình.
+        
+        Là một công trình nghiên cứu do sinh viên thực hiện, đề tài  \textbf{Ứng dụng thư viện SymPy \& Matplotlib 3D để tính thể tích bằng tích phân và trực quan hoá hình ảnh} đi kèm với một giới hạn nhất định: toàn bộ kết quả hiện chỉ dừng lại ở bước xây dựng nền tảng lý thuyết, viết mã nguồn phần mềm và mô phỏng trên máy tính. Đề tài hoàn toàn chưa có điều kiện tổ chức thực nghiệm sư phạm trực tiếp tại các lớp học phổ thông để đối chiếu mức độ tiếp thu của học sinh bằng các số liệu thực tế dạy học. Dù vậy, những đoạn mã được xây dựng trong đề tài hy vọng sẽ đóng vai trò như một bộ công cụ thô, hỗ trợ giáo viên tối ưu hóa 4 tiết Toán mỗi tuần trong việc thiết kế học liệu sau này.
+    
+            Trên cơ sở tham khảo các tài liệu, đề tài được chia thành năm chương với nội dung chính như sau:
+            
+            \textbf{Chương 1. Kiến thức chuẩn bị}
+           
+         Hệ thống hóa lại các định nghĩa, định lý cốt lõi về nguyên hàm, tích phân. Đồng thời, cung cấp cái nhìn tổng quan về cách cài đặt, khai báo và sử dụng thư viện SymPy cùng Matplotlib 3D
+
+            \textbf{Chương 2. Ứng dụng SymPy trong tính nguyên hàm \& tích phân}
+         
+        Trình bày cú pháp và xây dựng một chương trình tự động hoàn chỉnh, cho phép người dùng nhập trực tiếp hàm số $f(x)$ và tọa độ các cận để máy tính trả về kết quả nguyên hàm, tích phân xác định.  
+             
+             \textbf{Chương 3.Ứng dụng SymPy \& Matplotlib 3D trong tính thể tích}
+             
+        Vận dụng hệ thống tích hợp để giải quyết ba dạng toán trọng tâm: tính thể tích khối tròn xoay khi quay quanh trục Ox, quay quanh trục Oy, và thể tích tạo bởi miền giao nhau giữa hai đồ thị. Chương trình không chỉ tính ra kết quả thể tích cuối cùng mà còn vẽ tự động mô hình 3D của vật thể đó dựa trên thuật toán tích hợp.
+        
+        \textbf{Chương 4.Đánh giá- Tổng kết} 
+
+        Chương này chúng em đã đánh giá lại những kết quả đạt được của đề tài và mặt hạn chế của đề tài. 
+
+	%Phần 1%
+	
+	
+	
+\chapter{KIẾN THỨC CHUẨN BỊ}
+   \section{Mở đầu về nguyên hàm}
+   \subsection{Khái niệm nguyên hàm}
+
+
+    \begin{tcolorbox}[
+  colback=orange!4!white,      % Nền trong nhạt
+  colframe=orange!85!black,    % Viền và thanh tiêu đề màu nâu/cam
+  coltitle=white,              % Chữ tiêu đề màu trắng
+  fonttitle=\bfseries,         % In đậm chữ tiêu đề
+  arc=3pt,                     % Bo góc nhẹ
+  % Đặt \refstepcounter và \thedn lên thẳng tiêu đề:
+  title=\refstepcounter{dn}\textbf{Định nghĩa \thedn}
+]
+  Với $K$ là một khoảng, đoạn hoặc nửa khoảng của tập số thực $\mathbb{R}$, ta có định nghĩa sau:
+  
+  Cho hàm số $f(x)$ xác định trên $K$. Hàm số $F(x)$ được gọi là nguyên hàm của hàm số $f(x)$ trên $K$ nếu $F'(x) = f(x)$ với mọi $x \in K$.
+\end{tcolorbox}
+
+
+ \begin{tcolorbox}[
+  colback=orange!4!white,      % Nền trong nhạt
+  colframe=orange!85!black,    % Viền và thanh tiêu đề màu nâu/cam
+  coltitle=white,              % Chữ tiêu đề màu trắng
+  fonttitle=\bfseries,         % In đậm chữ tiêu đề
+  arc=3pt,                     % Bo góc nhẹ
+  % Đặt \refstepcounter và \thedn lên thẳng tiêu đề:
+  title=\refstepcounter{dn}\textbf{Định nghĩa \thedn\ (Họ nguyên hàm)}
+]
+  Giả sử hàm số $F(x)$ là một nguyên hàm của $f(x)$ trên $K$. Khi đó
+    \begin{itemize}
+    \item[a)] Với mỗi hằng số $C$, hàm số $G(x) = F(x) + C$ cũng là một nguyên hàm của hàm số $f(x)$ trên $K$.
+    \item[b)] Ngược lại, với mỗi nguyên hàm $H(x)$ của hàm số $f(x)$ trên $K$ thì tồn tại hằng số $C$ sao cho $H(x) = F(x) + C$ với mọi $x \in K$.
+    \end{itemize}
+    \noindent Họ (hay tập hợp) tất cả các nguyên hàm của hàm số $f(x)$ trên $K$ được kí hiệu: $\int f(x)\mathrm{d}x$.
+\end{tcolorbox}
+
+ \subsection{Tính chất của nguyên hàm}
+
+\noindent Cho $K$ là một khoảng, đoạn hoặc nửa khoảng của tập số thực $\mathbb{R}$.
+
+\[
+\int k f(x)\mathrm{d}x = k \int f(x)\mathrm{d}x \quad (k \neq 0).
+\]
+\[
+\int [f(x) \pm g(x)]\mathrm{d}x = \int f(x)\mathrm{d}x \pm \int g(x)\mathrm{d}x.
+\]
+\section{Nguyên hàm của một số hàm số sơ cấp}
+
+\renewcommand{\arraystretch}{2.2}
+\begin{center}
+\begin{tabular}{|c|l|l|}
+\hline
+\textbf{STT} & \textbf{Nguyên hàm cơ bản} & \textbf{Nguyên hàm mở rộng } $f(ax+b)$ ($a \neq 0$) \\ \hline
+1 & $\displaystyle\int 0\,\mathrm{d}x = C$ & --- \\ \hline
+2 & $\displaystyle\int \mathrm{d}x = x + C$ & $\displaystyle\int \mathrm{d}(ax+b) = ax + b + C$ \\ \hline
+3 & $\displaystyle\int x^{\alpha}\mathrm{d}x = \frac{x^{\alpha+1}}{\alpha + 1} + C \quad (\alpha \neq -1)$ & $\displaystyle\int (ax + b)^{\alpha}\mathrm{d}x = \frac{1}{a}\frac{(ax + b)^{\alpha+1}}{\alpha + 1} + C \quad (\alpha \neq -1)$ \\ \hline
+4 & $\displaystyle\int \frac{1}{x}\mathrm{d}x = \ln|x| + C$ & $\displaystyle\int \frac{1}{ax + b}\mathrm{d}x = \frac{1}{a}\ln|ax + b| + C$ \\ \hline
+5 & $\displaystyle\int e^x \mathrm{d}x = e^x + C$ & $\displaystyle\int e^{ax+b}\mathrm{d}x = \frac{1}{a}e^{ax+b} + C$ \\ \hline
+6 & $\displaystyle\int a^x \mathrm{d}x = \frac{a^x}{\ln a} + C \quad (0 < a \neq 1)$ & $\displaystyle\int k^{ax+b} \mathrm{d}x = \frac{1}{a}\frac{k^{ax+b}}{\ln k} + C \quad (0 < k \neq 1)$ \\ \hline
+7 & $\displaystyle\int \cos x \mathrm{d}x = \sin x + C$ & $\displaystyle\int \cos(ax + b)\mathrm{d}x = \frac{1}{a}\sin(ax + b) + C$ \\ \hline
+8 & $\displaystyle\int \sin x \mathrm{d}x = -\cos x + C$ & $\displaystyle\int \sin(ax + b)\mathrm{d}x = -\frac{1}{a}\cos(ax + b) + C$ \\ \hline
+9 & $\displaystyle\int \frac{1}{\cos^2 x}\mathrm{d}x = \tan x + C$ & $\displaystyle\int \frac{1}{\cos^2(ax + b)}\mathrm{d}x = \frac{1}{a}\tan(ax + b) + C$ \\ \hline
+10 & $\displaystyle\int \frac{1}{\sin^2 x}\mathrm{d}x = -\cot x + C$ & $\displaystyle\int \frac{1}{\sin^2(ax + b)}\mathrm{d}x = -\frac{1}{a}\cot(ax + b) + C$ \\ \hline
+\multicolumn{3}{|c|}{\textbf{Quy tắc chung:} Nếu $\int f(x)\mathrm{d}x = F(x) + C$ thì $\int f(ax + b)\mathrm{d}x = \dfrac{1}{a}F(ax + b) + C$} \\ \hline
+\end{tabular}
+\end{center}
+    \section{Mở đầu về tích phân}
+
+ \begin{tcolorbox}[
+  colback=orange!4!white,      % Nền trong nhạt
+  colframe=orange!85!black,    % Viền và thanh tiêu đề màu nâu/cam
+  coltitle=white,              % Chữ tiêu đề màu trắng
+  fonttitle=\bfseries,         % In đậm chữ tiêu đề
+  arc=3pt,                     % Bo góc nhẹ
+  % Đặt \refstepcounter và \thedn lên thẳng tiêu đề:
+  title=\refstepcounter{dn}\textbf{Định nghĩa \thedn\ Định nghĩa Tích phân}
+]
+  Cho $f(x)$ là hàm số liên tục trên đoạn $[a; b]$. Nếu $F(x)$ là một nguyên hàm của hàm số $f(x)$ trên đoạn $[a; b]$ thì hiệu số $F(b) - F(a)$ được gọi là tích phân từ $a$ đến $b$ của hàm số $f(x)$, ký hiệu là $\displaystyle\int_a^b f(x) \mathrm{d}x$.
+\vspace{0.2cm}
+Hiệu $F(b) - F(a)$ thường được ký hiệu là $\left. F(x) \right|_a^b$. Như vậy:
+\[
+\int_a^b f(x) \mathrm{d}x = \left. F(x) \right|_a^b = F(b) - F(a).
+\]
+
+\noindent Ta gọi $\displaystyle\int_a^b$ là dấu tích phân, $a$ là cận dưới, $b$ là cận trên, $f(x)\mathrm{d}x$ là biểu thức dưới dấu tích phân và $f(x)$ là hàm số dưới dấu tích phân.
+\end{tcolorbox}
+\begin{tcolorbox}[
+  colback=violet!3!white,      % Nền tím rất nhạt
+  colframe=violet!90!black,    % Viền & thanh tiêu đề tím đậm
+  coltitle=white,              % Chữ tiêu đề màu trắng
+  fonttitle=\bfseries,         % In đậm tiêu đề
+  arc=3pt,                     % Bo góc 3pt
+  title=\refstepcounter{dl}\textbf{Định lý \thedn\ Định lý Newton-Leibniz}
+]
+ Nếu hàm số $f(x)$ liên tục trên đoạn $[a, b]$ và $F(x)$ là một nguyên hàm của $f(x)$ trên $[a, b]$ thì:
+\[
+\int_{a}^{b} f(x) \, dx = F(b) - F(a) = F(x) \Big|_{a}^{b}
+\]
+\end{tcolorbox}
+\subsection{Tính chất của tích phân}
+\paragraph{Tính chất 1}
+Cho hàm số $y = f(x)$ liên tục trên đoạn $[a; b]$, $k$ là số thực. Khi đó:
+\[
+\int_a^b k f(x) \mathrm{d}x = k \int_a^b f(x) \mathrm{d}x.
+\]
+
+\paragraph{Tính chất 2}
+Cho hai hàm số $y = f(x), y = g(x)$ liên tục trên đoạn $[a; b]$. Khi đó:
+\begin{align*}
+\int_a^b \left[ f(x) + g(x) \right] \mathrm{d}x &= \int_a^b f(x) \mathrm{d}x + \int_a^b g(x) \mathrm{d}x; \\\\
+\int_a^b \left[ f(x) - g(x) \right] \mathrm{d}x &= \int_a^b f(x) \mathrm{d}x - \int_a^b g(x) \mathrm{d}x.
+\end{align*}
+
+\paragraph{Tính chất 3}
+Cho hàm số $y = f(x)$ liên tục trên đoạn $[a; b]$, $c \in (a; b)$. Khi đó,
+\[
+\int_a^b f(x) \mathrm{d}x = \int_a^c f(x) \mathrm{d}x + \int_c^b f(x) \mathrm{d}x.
+\]
+
+\subsection{Tích phân của một số hàm số sơ cấp}
+
+\renewcommand{\arraystretch}{2.2}
+\begin{center}
+\begin{tabular}{|c|l|l|}
+\hline
+\textbf{STT} & \textbf{Tích phân hàm số cơ bản} & \textbf{Giá trị tích phân} \\ \hline
+1 & $\displaystyle\int_a^b x^\alpha \mathrm{d}x$ & $\left. \dfrac{x^{\alpha+1}}{\alpha+1} \right|_a^b = \dfrac{b^{\alpha+1} - a^{\alpha+1}}{\alpha+1} \quad (\alpha \neq -1)$ \\ \hline
+2 & $\displaystyle\int_a^b \frac{1}{x} \mathrm{d}x$ & $\left. \ln|x| \right|_a^b = \ln|b| - \ln|a| \quad (a, b \neq 0, \text{cùng dấu})$ \\ \hline
+3 & $\displaystyle\int_a^b e^x \mathrm{d}x$ & $\left. e^x \right|_a^b = e^b - e^a$ \\ \hline
+4 & $\displaystyle\int_\alpha^\beta k^x \mathrm{d}x$ & $\left. \frac{k^x}{\ln k} \right|_\alpha^\beta = \frac{k^\beta - k^\alpha}{\ln k} \quad (0 < k \neq 1)$ \\ \hline
+5 & $\displaystyle\int_a^b \sin x \mathrm{d}x$ & $\left. -\cos x \right|_a^b = \cos a - \cos b$ \\ \hline
+6 & $\displaystyle\int_a^b \cos x \mathrm{d}x$ & $\left. \sin x \right|_a^b = \sin b - \sin a$ \\ \hline
+7 & $\displaystyle\int_a^b \frac{1}{\sin^2 x} \mathrm{d}x$ & $\left. -\cot x \right|_a^b = \cot a - \cot b$ \\ \hline
+8 & $\displaystyle\int_a^b \frac{1}{\cos^2 x} \mathrm{d}x$ & $\left. \tan x \right|_a^b = \tan b - \tan a$ \\ \hline
+\multicolumn{3}{|c|}{\textbf{Bổ đề đổi biến cơ bản ($a \neq 0$):}} \\
+\multicolumn{3}{|c|}{$\displaystyle\int_\alpha^\beta f(ax + b) \mathrm{d}x = \frac{1}{a} \left. F(ax + b) \right|_\alpha^\beta = \frac{1}{a} \int_{a\alpha + b}^{a\beta + b} f(t) \mathrm{d}t$} \\ \hline
+\end{tabular}
+\end{center}
+
+\section{Tổng quan lý thuyết về SymPy}
+
+SymPy là một thư viện mã nguồn mở của ngôn ngữ lập trình Python, được sử dụng để thực hiện các phép tính toán học ký hiệu. SymPy hỗ trợ nhiều phép toán như rút gọn biểu thức, giải phương trình, tính đạo hàm, tính nguyên hàm và tích phân.
+
+Đối với các bài toán tính thể tích bằng tích phân, SymPy hỗ trợ thiết lập và tính toán tích phân xác định một cách nhanh chóng. Nhờ đó, người học có thể tập trung vào việc xây dựng mô hình toán học, xác định công thức và kiểm tra kết quả.
+
+\textbf{Cài đặt và khai báo SymPy}
+
+Để sử dụng thư viện SymPy trong Python, ta khai báo thư viện bằng câu lệnh:
+
+\begin{lstlisting}
+import sympy as sp
+\end{lstlisting}
+
+Trong đó, \texttt{sp} là tên viết tắt được sử dụng để gọi các hàm và đối tượng của thư viện SymPy.
+
+\textcolor{red}{Để thực hiện các phép tính với biến $x$, ta khai báo:}
+
+\begin{lstlisting}
+     x = sp.symbols('x')
+\end{lstlisting}
+Sau khi khai báo, $x$ được xem là một biến ký hiệu và có thể sử dụng trong các biểu thức toán học.
+
+Trong trường hợp bài toán yêu cầu làm việc với nhiều biến số cùng lúc.
+
+Ví dụ các biến $x,y,z$ hoặc các hàm hằng số với tham số $a,b,c$ ta có thể khai báo đồng thời bằng cách phân tách chúng bằng các dấu phẩy hoặc dấu cách: 
+
+\begin{lstlisting}
+    x, y, z = sp.symbols('x y z')
+    a, b, c = sp.symbols('a, b, c')
+\end{lstlisting}
+
+Ngoài ra, đối với các bài toán tích phân xác định chứa các hằng số toán học đặc biệt như hằng số $\pi$ hay hằng số vô cực $\infty$, SymPy cung cấp sẵn các ký hiệu chuẩn để khai báo trực tiếp trong biểu thức:
+
+\begin{lstlisting}
+    pi_val = sp.pi
+    inf_val = sp.oo
+\end{lstlisting}
+
+\section{Tổng quan về Matplotlib 3D}
+
+Để biểu diễn trực quan các bài toán hình học không gian và vật thể tích phân, Matplotlib 3D cung cấp một hệ thống hàm đa dạng cho phép dựng đường, dựng mặt và tùy biến không gian tọa độ.
+
+\textbf{Cài đặt và khai báo Matplotlib 3D}
+
+\textcolor{red}{Trước hết, thư viện được cài đặt thông qua câu lệnh:}
+
+\begin{lstlisting}
+    pip install matplotlib
+\end{lstlisting}
+
+Sau khi cài đặt thành công, ta tiến hành khai báo các thư viện cần thiết bằng câu lệnh:
+
+\begin{lstlisting}
+    import matplotlib.pyplot as plt
+    import numpy as np
+\end{lstlisting}
+
+Trong đó: \textbf{plt }là module để quản lý khung vẽ và \textbf{np} được dùng để khởi tạo lưới dữ liệu tọa độ phẳng.  
+
+\textcolor{red}{Để khởi tạo một không gian hiển thị đồ thị 3D (Hệ trục tọa độ $Oxyz$), ta khai báo:}
+
+\begin{lstlisting}
+    fig = plt.figure()
+    ax = fig.add_subplot(projection='3d')
+\end{lstlisting}
+
+Sau khi khai báo, đối tượng $a x$ được định dạng là một không gian ba chiều trực quan và sẵn sàng để sử dụng các hàm vẽ bề mặt \textcolor{blue}{plot\_surface} hoặc vẽ đường cong không gian.
+
+Để biểu diễn một mặt cong 3D từ một hàm số dạng $z = f(x, y)$, ta cần tạo một lưới tọa độ phẳng \((X, Y)\) bằng hàm \textbf{np.meshgrid()} trước khi tính toán giá trị mảng \(Z\):
+
+\begin{lstlisting}
+    x = np.linspace(-2, 2, 100)
+    y = np.linspace(-2, 2, 100)
+    X, Y = np.meshgrid(x, y)
+\end{lstlisting}
+
+\chapter{ỨNG DỤNG SYMPY TRONG TÍNH NGUYÊN HÀM \& TÍCH PHÂN}
+
+
+\section{Cách viết chương trình trong Sympy}
+\textbf{Tính nguyên hàm}
+
+ Đối với nguyên hàm $\displaystyle \int f(x)\,dx$
+
+\textcolor{red}{Cú pháp sử dụng trong SymPy là:}
+\begin{lstlisting}
+   sp.integrate(f, x)
+\end{lstlisting}
+
+\textbf{Tính tích phân xác định}
+
+Đối với tích phân xác định khi có cận $[a,b]$ cho trước ta có thể thực hiện như sau: 
+$\displaystyle
+\int_a^b f(x)\,dx
+$
+
+\textcolor{red}{Cú pháp trong SymPy là:}
+
+\begin{lstlisting}
+    sp.integrate(f, (x, a, b))
+\end{lstlisting}
+
+Đối với bài toán tính tích phân xác định với các cận $[a, b]$ tùy ý do người dùng nhập vào, ta sử dụng hàm \textbf{input()} kết hợp với hàm \textbf{sp.sympify()} để chuyển đổi dữ liệu nhập vào thành định dạng số, ký hiệu toán học của SymPy.
+
+\textcolor{red}{Cú pháp nhập cận và tính tích phân như sau:}
+
+\begin{lstlisting}
+import sympy as sp
+
+x = sp.symbols('x')
+f = x**2
+
+# Nhap gia tri can a va b tu ban phim
+a = sp.sympify(input("Nhap can duoi a: "))
+b = sp.sympify(input("Nhap can tren b: "))
+
+# Tinh tich phan xac dinh voi can [a, b]
+I = sp.integrate(f, (x, a, b))
+
+print(f"Tich phan cua f(x) tu {a} den {b} la: {I}")
+\end{lstlisting}
+\section{Chương trình hoàn chỉnh}
+Tổng hợp các cú pháp khai báo và tính toán nêu trên, ta xây dựng chương trình hoàn chỉnh để giải quyết đồng thời bài toán tính nguyên hàm và tích phân nhập từ hàm f(x) xác định như sau: 
+
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.97,0.97,0.97}
+
+\lstdefinestyle{pythonstyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\small,
+    columns=flexible,            % Tránh lỗi giãn khoảng cách chữ
+    keepspaces=true,             % Giữ nguyên khoảng cách chuẩn trong code
+    breaklines=true,                 
+    captionpos=b,                    
+    numbers=left,                    
+    numbersep=8pt,                  
+    showstringspaces=false,
+    tabsize=4
+}
+
+\lstset{style=pythonstyle}
+
+\begin{lstlisting}[language=Python]
+import sympy as sp
+
+# 1. Khoi tao bien ky hieu toan hoc x
+x = sp.symbols('x')
+C = sp.symbols('C')
+
+print("--- CHUONG TRINH TINH NGUYEN HAM & TICH PHAN TU DONG ---")
+try:
+    # 2. Nhap ham so f(x) tu ban phim
+    chuoi_nhap = input("Nhap ham so f(x): ")
+    
+    # Chuyen doi chuoi ky tu thanh bieu thuc toan hoc cua SymPy
+    f = sp.sympify(chuoi_nhap)
+    print(f"\nHam so ban da nhap: f(x) = {f}")
+    print("-" * 30)
+
+    # 3. Tinh va in Nguyen ham
+    F = sp.integrate(f, x) + C
+    print(f"-> Nguyen ham F(x) = {F}")
+    print("-" * 30)
+
+    # 4. Nhap can va tinh Tich phan xac dinh
+    print("Nhap can cho tich phan xac dinh:")
+    can_duoi_nhap = input("Can duoi (a): ")
+    can_tren_nhap = input("Can tren (b): ")
+    
+    # Chuyen doi can sang bieu thuc toan hoc (ho tro ca pi, E, 1/2)
+    a = sp.sympify(can_duoi_nhap)
+    b = sp.sympify(can_tren_nhap)
+
+    # Tinh tich phan xac dinh
+    I = sp.integrate(f, (x, a, b))
+    
+    print(f"\n-> Tich phan xac dinh tu {a} den {b}:")
+    print(f"Gia tri chinh xac (phan so/can/pi): I = {I}")
+    print(f"Gia tri xap xi (so thap phan): I ~ {float(I):.4f}")
+
+except Exception as e:
+    print(f"\nDa xay ra loi: {e}")
+    print("Vui long kiem tra lai dinh dang ham so hoac can ban da nhap!")
+\end{lstlisting}
+
+\section{Bài toán minh hoạ}
+
+\begin{tcolorbox}[
+  colback=pink!3!white,      % Nền tím rất nhạt
+  colframe=violet!90!black,    % Viền & thanh tiêu đề tím đậm
+  coltitle=white,              % Chữ tiêu đề màu trắng
+  fonttitle=\bfseries,         % In đậm tiêu đề
+  arc=3pt,                     % Bo góc 3pt
+  title=\refstepcounter{dl}\textbf{Ví dụ}
+]
+  Tìm họ nguyên hàm của hàm $\displaystyle f(x) = \frac{1}{3\sqrt{x^2}} + \frac{1}{\sqrt{x}} + \frac{3}{2}\sqrt{x} $ ?
+  Tính tích phân của hàm $f(x)$ trên đoạn [-1;3] và [0;3]?
+  
+\end{tcolorbox}
+
+\textbf{Hướng dẫn thực hiện trực tiếp: }
+
+\noindent Áp dụng công thức nguyên hàm cơ bản: $\displaystyle\int x^n \, \mathrm{d}x = \frac{x^{n+1}}{n+1} + C$
+
+\begin{itemize}
+    \item \textbf{Số hạng thứ nhất:}
+     $\displaystyle\int \frac{1}{3}x^{-\frac{2}{3}} \, \mathrm{d}x = \frac{1}{3} \cdot \frac{x^{-\frac{2}{3} + 1}}{-\frac{2}{3} + 1} = \frac{1}{3} \cdot \frac{x^{\frac{1}{3}}}{\frac{1}{3}} = x^{\frac{1}{3}} = \sqrt[3]{x}$
+    
+    \item \textbf{Số hạng thứ hai:}
+     $\displaystyle\int x^{-\frac{1}{2}} \, \mathrm{d}x = \frac{x^{-\frac{1}{2} + 1}}{-\frac{1}{2} + 1} = \frac{x^{\frac{1}{2}}}{\frac{1}{2}} = 2x^{\frac{1}{2}} = 2\sqrt{x} $
+    
+    \item \textbf{Số hạng thứ ba:}
+     $\displaystyle\int \frac{3}{2}x^{\frac{1}{2}} \, \mathrm{d}x = \frac{3}{2} \cdot \frac{x^{\frac{1}{2} + 1}}{\frac{1}{2} + 1} = \frac{3}{2} \cdot \frac{x^{\frac{3}{2}}}{\frac{3}{2}} = x^{\frac{3}{2}} = x \cdot x^{\frac{1}{2}} = x\sqrt{x}$
+\end{itemize}
+
+\noindent\textbf{Kết luận:} Cộng các kết quả lại và thêm hằng số $C$, ta được họ nguyên hàm là:
+\[ F(x) = \sqrt[3]{x} + 2\sqrt{x} + x\sqrt{x} + C \]
+
+\noindent\textbf{Tính tích phân}  $\displaystyle I = \int_{0}^{3} f(x) \mathrm{d}x$
+\\
+
+\noindent Từ họ nguyên hàm đã tìm được ở trên:
+ $\displaystyle F(x) = \sqrt[3]{x} + 2\sqrt{x} + x\sqrt{x}$
+ \\
+
+\noindent Tích phân $\displaystyle\int_{-1}^{3} f(x) \mathrm{d}x$ \textbf{không tồn tại} do chứa $\sqrt{x}$ nên chỉ xác định với $x > 0$ 
+(không xác định trên đoạn $[-1, 0]$).
+\\
+
+\noindent Áp dụng công thức Newton-Leibniz, ta tính tích phân trên đoạn $[0, 3]$ như sau:
+\begin{align*}
+I = \int_{0}^{3} f(x) \mathrm{d}x &= F(3) - F(0) \\
+&= \left( \sqrt[3]{3} + 2\sqrt{3} + 3\sqrt{3} \right) - \left( \sqrt[3]{0} + 2\sqrt{0} + 0\sqrt{0} \right) \\
+&= \sqrt[3]{3} + 5\sqrt{3}.
+\end{align*}
+
+\textbf{Kết luận:} $I = \sqrt[3]{3} + 5\sqrt{3} \approx 10{,}102$.
+\\
+\\
+
+\textbf{Khi dùng chương trình để thực hiện:}
+
+\begin{center}
+    \includegraphics[width=0.9\linewidth]{Ảnh chụp màn hình 2026-10-01 192705.png}
+
+    Hình 2.1. Lỗi sai cần
+
+    \vspace{0.5cm}
+
+    \includegraphics[width=0.9\linewidth]{Ảnh chụp màn hình 2026-10-01 193356.png}
+
+    Hình 2.2. Kết quả bài toán
+\end{center}
+
+\textbf{Nhận xét:} Kết quả khi ta thực hiện giải bài toán khi tìm nguyên hàm, tích phân và việc sử dụng thư viện sympy trong Python chúng ta thấy đều cho ra kết quả như nhau. Tuy nhiên, việc ứng dụng chương trình giúp tiết kiệm thời gian khi chúng ta cần đưa ra đáp án chính xác. 
+
+\chapter{ ỨNG DỤNG SYMPY \& MATPLOTLIB 3D TRONG TÍNH THỂ TÍCH }
+
+Dựa trên kiến thức chuẩn bị về tích phân và hướng dẫn ứng dụng Sympy và Matplotlib 3D. Chương 3 này sử dụng SymPy kết hợp với Matplotlib 3D để thực hiện và trực quan hóa bài toán tính thể tích bằng tích phân. 
+
+Đối với phần chương 3, nội dung thực hiện bao gồm các dạng bài toán trọng tâm sau:
+
+\begin{itemize}
+    \item Thể tích khối tròn xoay giới hạn bởi đồ thị hàm số khi quay quanh  $Ox$.
+    \item Thể tích khối tròn xoay giới hạn bởi đồ thị hàm số khi quay quanh  $Oy$.
+    \item Thể tích khối tròn xoay tạo thành bởi miền giao nhau giữa hai đồ thị khi quay quanh trục $Ox$.
+\end{itemize}
+\textbf{Trong đó:}
+
+\begin{itemize}
+    \item Sympy được sử dụng để khai báo biến, biểu diễn hàm số và tính tích phân.
+    \item NumPy hỗ trợ tạo các giá trị số phục vụ việc vẽ đồ thị.
+    \item Matplotlib được sử dụng để biểu diễn đồ thị của hàm số.
+\end{itemize}
+
+Để người dùng nhập hàm số cần tính thể tích. Hàm \textbf{sympify()} được sử dụng để chuyển chuỗi nhập vào thành biểu thức SymPy.
+
+Khi đó, chương trình sẽ tính thể tích trên đoạn $[a,b]$.
+
+\textbf{Quy trình vận hành tổng quát của chương trình được mô tả chi tiết như sau:}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    % Định dạng hình dáng và màu sắc các khối
+    block/.style={
+        rectangle, 
+        rounded corners=8pt, 
+        draw=red!80!black, 
+        top color=white, 
+        bottom color=yellow!10, 
+        drop shadow,
+        minimum width=5.5cm, 
+        minimum height=1.2cm, 
+        align=center, 
+        font=\bfseries\sffamily,
+        inner sep=8pt
+    },
+    % Định dạng đường nối và mũi tên
+    line/.style={
+        draw=red!80!black, 
+        -Stealth, 
+        line width=1.5pt
+    }
+]
+
+% Đặt các nút sơ đồ theo chiều dọc
+\node (step1) [block] {1. Nhập dữ liệu};
+\node (step2) [block, below=0.8cm of step1] {2. Xây dựng hàm số};
+\node (step3) [block, below=0.8cm of step2] {3. Thiết lập tích phân};
+\node (step4) [block, below=0.8cm of step3] {4. Tính toán bằng SymPy};
+\node (step5) [block, below=0.8cm of step4] {5. Hiển thị kết quả};
+
+% Vẽ các mũi tên nối
+\draw [line] (step1) -- (step2);
+\draw [line] (step2) -- (step3);
+\draw [line] (step3) -- (step4);
+\draw [line] (step4) -- (step5);
+
+\end{tikzpicture}
+\caption{\textbf{Sơ đồ quy trình tính tích phân bằng SymPy}}
+\label{fig:quy_trinh_doc}
+\end{figure}
+
+\section{Thể tích khối tròn xoay quay quanh trục Ox}
+
+Xét vật thể tròn xoay tạo thành khi quay miền phẳng giới hạn bởi đồ thị $y=f(x)$ trục $Ox$ và hai đường thẳng $x=a$ và $x=b$ quanh trục $Ox$.
+\\
+
+Thể tích của vật thể được tính theo công thức:
+$\displaystyle V=\pi\int_a^b[f(x)]^2\,dx.$
+\\
+
+Trong chương trình Python, công thức trên được chuyển thành:
+\begin{lstlisting}
+V = sp.pi * sp.integrate(f**2, (x, a, b))
+\end{lstlisting}
+
+Sau đó, sử dụng lệnh \textbf{simplify()} để rút gọn kết quả:
+\begin{lstlisting}
+V = sp.simplify(V)
+\end{lstlisting}
+
+Cuối cùng, kết quả được hiển thị:
+
+\begin{lstlisting}
+print("The tich V =", V)
+\end{lstlisting}
+Để trực quan hóa vật thể tròn xoay quanh trục $Ox$ trong không gian 3D, ta sử dụng thư viện \textbf{matplotlib}.
+\\
+
+Bằng cách kết hợp thuật toán tính toán đại số từ \textbf{SymPy} và phần dựng mô hình 3D từ \textbf{Matplotlib} đã trình bày ở trên, chúng ta thu được \textbf{Chương trình hoàn chỉnh} như sau:
+
+\begin{lstlisting}
+import numpy as np
+import matplotlib.pyplot as plt
+import sympy as sp
+
+# ==========================================
+# 1. TINH THE TICH BANG SYMPY (CO NHAN SO PI)
+# ==========================================
+x_sym = sp.symbols('x')
+
+print("--- Bai toan 1. The tich khoi tron xoay quay quanh truc Ox ---")
+print("Luu y: Ban co the nhap can la so (1, 2) hoac hang so pi (pi, pi/2, 2*pi)")
+print("-" * 65)
+
+try:
+    # Nhap ham so va cac can tu ban phim duoi dang chuoi
+    chuoi_f = input("Nhap ham so f(x) : ")
+    chuoi_a = input("Nhap can duoi a  : ")
+    chuoi_b = input("Nhap can tren b  : ")
+
+    # Chuyen doi tat ca sang bieu thuc toan hoc cua SymPy
+    f_sym = sp.sympify(chuoi_f)
+    a_sym = sp.sympify(chuoi_a)
+    b_sym = sp.sympify(chuoi_b)
+
+    # Ap dung cong thuc: V = pi * tich phan cua [f(x)]^2 tu a den b
+    bieu_thuc_tich_phan = f_sym**2
+    V_sym = sp.pi * sp.integrate(bieu_thuc_tich_phan, (x_sym, a_sym, b_sym))
+
+    print(f"\n-> Bieu thuc tich phan: V = pi * tich phan tu {a_sym} den {b_sym} cua ({bieu_thuc_tich_phan}) dx")
+    print(f"-> The tich cua V = {V_sym}")
+    print(f"-> Gia tri xap xi V ~ {float(V_sym):.4f}")
+    print("-" * 65)
+
+    # Chuyen doi cac can sang dang so thuc float de phuc vu ve do thi 3D
+    can_a = float(a_sym)
+    can_b = float(b_sym)
+
+    # ==========================================
+    # 2. VE MO HINH VAT THE TRON XOAY 3D
+    # ==========================================
+    f_num = sp.lambdify(x_sym, f_sym, 'numpy')
+
+    # Tao luoi toa do xoay quanh truc Ox
+    x_vals = np.linspace(can_a, can_b, 100)
+    theta = np.linspace(0, 2 * np.pi, 100)
+    X, Theta = np.meshgrid(x_vals, theta)
+    
+    R = np.abs(f_num(X))
+    Y = R * np.cos(Theta)
+    Z = R * np.sin(Theta)
+
+    fig = plt.figure(figsize=(9, 6))
+    ax = fig.add_subplot(111, projection='3d')
+
+    # Ve be mat vat the tron xoay
+    surf = ax.plot_surface(X, Y, Z, cmap='plasma', alpha=0.75, edgecolor='none')
+    
+    # Ve hai mat day phang
+    ax.plot_surface(np.full_like(X, can_a), Y, Z, color='gray', alpha=0.3)
+    ax.plot_surface(np.full_like(X, can_b), Y, Z, color='gray', alpha=0.3)
+
+    # Ve truc doi xung Ox
+    ax.plot([can_a - 0.5, can_b + 0.5], [0, 0], [0, 0], color='black', linestyle='--', linewidth=2, label='Truc Ox')
+
+    plt.title('Bai toan 1. The tich khoi tron xoay quay quanh truc Ox', fontsize=12, fontweight='bold', pad=20)
+    ax.set_xlabel('Truc X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
+    ax.legend(loc='upper left')
+    fig.colorbar(surf, ax=ax, shrink=0.5, aspect=10, label='Do lon ban kinh f(x)')
+    ax.set_box_aspect((np.ptp(x_vals), np.ptp(Y), np.ptp(Z)))
+    
+    plt.show()
+
+except Exception as e:
+    print(f"\nDa xay ra loi: {e}")
+    print("Vui long kiem tra lai bieu thuc ham so hoac gia tri can da nhap!")
+\end{lstlisting}
+
+\section{Thể tích khối tròn xoay quay quanh trục Oy}
+Thể tích khối tròn xoay sinh ra khi quay hình phẳng $D$ giới hạn bởi các đường
+$x=g(y)$, trục tung và hai đường $y=c$; $y=d$ quanh trục $Oy$ được tính theo công thức:
+\[
+V=\pi\int_c^d g^2(y)\,dy
+\]
+
+Trong chương trình Python, công thức trên được chuyển thành:
+\\
+\begin{lstlisting}
+V = sp.pi * sp.integrate(g**2, (y, c, d))
+\end{lstlisting}
+
+Sau đó, sử dụng lệnh \textbf{simplify()} để rút gọn kết quả:
+\\
+\begin{lstlisting}
+V = sp.simplify(V)
+\end{lstlisting}
+
+Cuối cùng, kết quả được hiển thị:
+\\
+\begin{lstlisting}
+print("The tich V =", V)
+\end{lstlisting}
+Để trực quan hóa vật thể tròn xoay quanh trục $Oy$ trong không gian 3D, ta sử dụng thư viện \textbf{matplotlib}. 
+
+
+Bằng cách kết hợp thuật toán tính toán đại số từ \textbf{SymPy} và phần dựng mô hình 3D từ \textbf{Matplotlib} đã trình bày ở trên, chúng ta thu được \textbf{Chương trình hoàn chỉnh} như sau:
+\begin{lstlisting}
+import numpy as np
+import matplotlib.pyplot as plt
+import sympy as sp
+
+# ==========================================
+# 1. TINH THE TICH BANG SYMPY (QUAY QUANH OY)
+# ==========================================
+y_sym = sp.symbols('y')  # Su dung bien ky hieu la y
+
+print("--- Bai toan 2. The tich khoi tron xoay quay quanh truc Oy ---")
+print("Nhap ham so x = g(y) theo bien y (Vi du: y**2, sqrt(y), sin(y),...)")
+print("-" * 65)
+
+try:
+    # Nhap ham so g(y) va cac can theo truc Oy tu ban phim
+    chuoi_g = input("Nhap ham so g(y) : ")
+    chuoi_c = input("Nhap can duoi c  : ")
+    chuoi_d = input("Nhap can tren d  : ")
+
+    # Chuyen doi tat ca sang bieu thuc toan hoc cua SymPy
+    g_sym = sp.sympify(chuoi_g)
+    c_sym = sp.sympify(chuoi_c)
+    d_sym = sp.sympify(chuoi_d)
+
+    # Ap dung cong thuc quay quanh Oy: V = pi * tich phan cua [g(y)]^2 tu c den d
+    bieu_thuc_tich_phan = g_sym**2
+    V_sym = sp.pi * sp.integrate(bieu_thuc_tich_phan, (y_sym, c_sym, d_sym))
+
+    print(f"\n-> Bieu thuc tich phan: V = pi * tich phan tu {c_sym} den {d_sym} cua ({bieu_thuc_tich_phan}) dy")
+    print(f"-> The tich chinh xac V = {V_sym}")
+    print(f"-> Gia tri xap xi V ~ {float(V_sym):.4f}")
+    print("-" * 65)
+
+    # Chuyen doi cac can sang dang so thuc float de phuc vu ve do thi 3D
+    can_c = float(c_sym)
+    can_d = float(d_sym)
+
+    # ==========================================
+    # 2. VE MO HINH VAT THE TRON XOAY 3D (QUAY QUANH OY)
+    # ==========================================
+    g_num = sp.lambdify(y_sym, g_sym, 'numpy')
+
+    # Tao luoi toa do xoay quanh truc Oy
+    y_vals = np.linspace(can_c, can_d, 100)
+    theta = np.linspace(0, 2 * np.pi, 100)
+    Y, Theta = np.meshgrid(y_vals, theta) # Truc Y dong vai tro truc doc chinh
+    
+    # Ban kinh tai moi vi tri y chinh la tri tuyet doi cua g(y)
+    R = np.abs(g_num(Y))
+    
+    # Chuyen sang toa do Descartes 3D (Truc Oy la truc doi xung xoay)
+    X = R * np.cos(Theta)
+    Z = R * np.sin(Theta)
+
+    fig = plt.figure(figsize=(9, 6))
+    ax = fig.add_subplot(111, projection='3d')
+
+    # Ve be mat vat the tron xoay quanh Oy
+    surf = ax.plot_surface(X, Y, Z, cmap='viridis', alpha=0.75, edgecolor='none')
+    
+    # Ve hai mat day phang chan tai y = c va y = d
+    ax.plot_surface(X, np.full_like(Y, can_c), Z, color='gray', alpha=0.3)
+    ax.plot_surface(X, np.full_like(Y, can_d), Z, color='gray', alpha=0.3)
+
+    # Ve truc doi xung Oy (Chay doc tu c den d, X=0 va Z=0)
+    ax.plot([0, 0], [can_c - 0.5, can_d + 0.5], [0, 0], color='black', linestyle='--', linewidth=2, label='Truc Oy')
+
+    # Cau hinh giao dien do thi theo dung yeu cau
+    plt.title('Bai toan 2. The tich khoi tron xoay quay quanh truc Oy', fontsize=12, fontweight='bold', pad=20)
+    ax.set_xlabel('X')
+    ax.set_ylabel('Truc Y (Can tu c den d)')
+    ax.set_zlabel('Z')
+    ax.legend(loc='upper left')
+    fig.colorbar(surf, ax=ax, shrink=0.5, aspect=10, label='Do lon ban kinh g(y)')
+    # Giu ti le khong gian thuc te khong bi meo lech
+    ax.set_box_aspect((np.ptp(X), np.ptp(y_vals), np.ptp(Z))) 
+    
+    plt.show()
+
+except Exception as e:
+    print(f"\nDa xay ra loi: {e}")
+    print("Vui long kiem tra lai bieu thuc ham so theo bien y hoac gia tri can da nhap!")
+\end{lstlisting}
+\section{ Thể tích khối tròn xoay tạo bởi miền giao nhau giữa hai đồ thị khi quay quanh trục $Ox$.}
+
+Nếu hình phẳng $D$ được giới hạn bởi các đường
+$y=f(x)$; $y=g(x)$ và hai đường $x=a$; $x=b$ là giao điểm của 2 đường $f(x)$ và $g(x)$(với $f(x)\cdot g(x)\geq 0,\ \forall x\in[a;b]$) thì thể tích khối tròn xoay
+sinh bởi khi quay $D$ quanh trục $Ox$ được tính bởi công thức:
+
+\[
+V=\pi\int_a^b\left|f^2(x)-g^2(x)\right|\,dx.
+\]
+Đối với dạng toán này trước tiên chúng ta cần phải nhập các hàm $f(x);g(x)$ và tìm giao điểm của các hàm đó. 
+
+
+Bằng cách kết hợp thuật toán tính toán đại số từ \textbf{SymPy} và phần dựng mô hình 3D từ \textbf{Matplotlib} đã trình bày ở trên, chúng ta thu được \textbf{Chương trình hoàn chỉnh} như sau:
+\\
+
+\begin{lstlisting}
+import numpy as np
+import matplotlib.pyplot as plt
+import sympy as sp
+
+# ==========================================
+# 1. NHAP 2 HAM SO VA TU DONG TIM GIAO DIEM
+# ==========================================
+x_sym = sp.symbols('x')
+
+print("--- Chuong trinh tu dong tim giao diem, tinh the tich & ve do thi doi ---")
+print("Luu y nhap dung dinh dang Python (Vi du: x**2, 2*x, sqrt(x), sin(x),...)")
+print("-" * 75)
+
+try:
+    # Nhap hai ham so tu ban phim
+    chuoi_f = input("1. Nhap ham so f(x): ")
+    chuoi_g = input("2. Nhap ham so g(x): ")
+
+    # Chuyen doi sang bieu thuc SymPy
+    f_sym = sp.sympify(chuoi_f)
+    g_sym = sp.sympify(chuoi_g)
+
+    # TU DONG GIAI PHUONG TRINH HOANH DO GIAO DIEM: f(x) = g(x) -> f(x) - g(x) = 0
+    nghiem_all = sp.solve(f_sym - g_sym, x_sym)
+    
+    # Loc lay cac nghiem thuc mot cach an toan bang cach kiem tra .is_real
+    giao_diem = []
+    for val in nghiem_all:
+        if val.is_real:  
+            giao_diem.append(float(val))
+    
+    giao_diem = sorted(list(set(giao_diem))) # Loai bo nghiem trung va sap xep tu nho den lon
+
+    # Kiem tra xem co du so luong giao diem de tao thanh hinh phang kin hay khong
+    if len(giao_diem) < 2:
+        print("\n[Loi] Hai ham so khong cat nhau tai du 2 diem de tao thanh mot hinh phang gioi han!")
+        print(f"Cac giao diem tim thay: {giao_diem}")
+    else:
+        # Laye giao diem nho nhat lam can duoi va lon nhat lam can tren
+        can_a_val = giao_diem[0]
+        can_b_val = giao_diem[-1]
+
+        # Ap dung cong thuc the tich khoi tron xoay quanh Ox gioi han boi 2 duong ham so:
+        # V = pi * tich phan tu a den b cua |f^2(x) - g^2(x)| dx
+        bieu_thuc_tich_phan = sp.Abs(f_sym**2 - g_sym**2)
+        V_sym = sp.pi * sp.integrate(bieu_thuc_tich_phan, (x_sym, can_a_val, can_b_val))
+
+        print("-" * 75)
+        print(f"-> Tu dong tim thay {len(giao_diem)} giao diem thuc: {giao_diem}")
+        print(f"-> Mien phang tinh toan gioi han trong doan tu x = {can_a_val} den x = {can_b_val}")
+        print(f"-> The tich khroi tron xoay chinh xac V = {V_sym}")
+        print(f"-> Gia tri xap xi so thap phan:    V ~ {float(V_sym):.4f}")
+        print("-" * 75)
+
+        # Dinh nghia lai bien khoang_cach phuoc vu ve truc toa do Ox
+        khoang_cach = can_b_val - can_a_val if can_b_val != can_a_val else 1.0
+
+        # ==========================================
+        # 2. KHOI TAO KHUNG VE DO THI (CHI DU`NG 3D)
+        # ==========================================
+        fig = plt.figure(figsize=(9, 6))
+        f_num = sp.lambdify(x_sym, f_sym, 'numpy')
+        g_num = sp.lambdify(x_sym, g_sym, 'numpy')
+
+        ax3d = fig.add_subplot(111, projection='3d')
+
+        # Luoi toa do quay trong pham vi [a, b]
+        x_vals_3d = np.linspace(can_a_val, can_b_val, 100)
+        theta = np.linspace(0, 2 * np.pi, 100)
+        X, Theta = np.meshgrid(x_vals_3d, theta)
+# Tinh ban kinh cua hai mat cong tron xoay tai moi diem x
+        R_f = np.abs(f_num(X))
+        R_g = np.abs(g_num(X))
+
+        # Phan dinh mat ngoai (ban kinh lon hon) va mat trong (ban kinh nho hon)
+        R_outer = np.maximum(R_f, R_g)
+        R_inner = np.minimum(R_f, R_g)
+
+        # Dung va hien thi mat cong bao boc ben ngoai vat the
+        Y_out = R_outer * np.cos(Theta)
+        Z_out = R_outer * np.sin(Theta)
+        surf_out = ax3d.plot_surface(X, Y_out, Z_out, cmap='plasma', alpha=0.6, edgecolor='none')
+
+        # Dung va hien thi long loi ben trong vat the (neu co khoang trong)
+        if not np.allclose(R_inner, R_outer):
+            Y_in = R_inner * np.cos(Theta)
+            Z_in = R_inner * np.sin(Theta)
+            ax3d.plot_surface(X, Y_in, Z_in, cmap='winter', alpha=0.3, edgecolor='none')
+
+        # Ve 2 mat phang cat chan hai dau tai cac diem giao
+        ax3d.plot_surface(np.full_like(X, can_a_val), Y_out, Z_out, color='gray', alpha=0.15)
+        ax3d.plot_surface(np.full_like(X, can_b_val), Y_out, Z_out, color='gray', alpha=0.15)
+        ax3d.plot([can_a_val - khoang_cach*0.1, can_b_val + khoang_cach*0.1], [0, 0], [0, 0], color='black', linestyle='--', linewidth=2, label='Truc Ox')
+        
+        ax3d.set_title('Khoi tron xoay rong/dac 3D tao thanh', fontsize=11, fontweight='bold')
+
+        ax3d.set_xlabel('Truc X')
+        ax3d.set_ylabel('Y')
+        ax3d.set_zlabel('Z')
+        ax3d.legend(loc='upper left')
+        
+        # Can chinh can bang ty le hien thi giua cac truc 3D
+        ptp_x = np.ptp(x_vals_3d)
+        ptp_y = np.ptp(Y_out)
+        ptp_z = np.ptp(Z_out)
+        
+        aspect_x = ptp_x if ptp_x > 0 else 1.0
+        aspect_y = ptp_y if ptp_y > 0 else 1.0
+        aspect_z = ptp_z if ptp_z > 0 else 1.0
+        
+        ax3d.set_box_aspect((aspect_x, aspect_y, aspect_z))
+
+        plt.suptitle('Mo phong tu dong khoi tron xoay giao nhau giua 2 do thi quanh Ox', fontsize=13, fontweight='bold', y=0.98)
+        plt.tight_layout()
+        plt.show()
+
+except Exception as e:
+    print(f"\nDa xay ra loi he thong: {e}")
+    print("Vui long kiem tra lai dinh dang ham so (Vi du viet dau nhan '*', dau mu '**').")
+\end{lstlisting}
+\newpage
+\section{Bài toán minh họa}
+\begin{tcolorbox}[
+  colback=pink!3!white,      % Nền tím rất nhạt
+  colframe=violet!90!black,    % Viền & thanh tiêu đề tím đậm
+  coltitle=white,              % Chữ tiêu đề màu trắng
+  fonttitle=\bfseries,         % In đậm tiêu đề
+  arc=3pt,                     % Bo góc 3pt
+  title=\refstepcounter{dl}\textbf{Bài toán 1 Quay quanh trục Ox}
+]
+ Thể tích của khối tròn xoay thu được khi quay hình phẳng
+được giới hạn bởi đường cong $y=\sin x$, trục hoành và hai đường thẳng
+$x=0,\ x=\pi$ (hình vẽ) quanh trục $Ox$ là?
+\end{tcolorbox}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.38\textwidth]{h3.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\textbf{Lời giải:}
+
+Áp dụng công thức ở định lý trên ta có:\\
+$\displaystyle
+V=\pi\int_0^\pi \sin^2x\,dx.
+$
+
+Ta có
+\[
+\sin^2x=\frac{1-\cos 2x}{2}.
+\]
+
+Do đó
+\[
+\begin{aligned}
+V
+&=\pi\int_0^\pi \frac{1-\cos 2x}{2}\,dx=\frac{\pi}{2}
+\left(x-\frac{\sin 2x}{2}\right)\Bigg|_0^\pi\\
+&=\frac{\pi}{2}\cdot\pi=\frac{\pi^2}{2}.
+\end{aligned}
+\]
+\newpage
+\textbf{Phần mềm sympy}\\
+\textit{Kết quả:} 
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{sinx.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{3dsinx.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\newpage
+\begin{tcolorbox}[
+  colback=pink!3!white,      % Nền tím rất nhạt
+  colframe=violet!90!black,    % Viền & thanh tiêu đề tím đậm
+  coltitle=white,              % Chữ tiêu đề màu trắng
+  fonttitle=\bfseries,         % In đậm tiêu đề
+  arc=3pt,                     % Bo góc 3pt
+  title=\refstepcounter{dl}\textbf{Bài toán 2 Quay quanh Ox}
+]
+Tính thể tích khối tròn xoay thu được khi quay hình phẳng
+được giới hạn bởi đường cong
+$y=\sqrt{2^2-x^2}$ và trục hoành quanh trục hoành.
+
+\end{tcolorbox}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{h4.png}
+    \label{fig:placeholder}
+\end{figure}
+
+
+\textbf{Lời giải}
+
+Ta có:
+$
+y=\sqrt{2^2-x^2}=\sqrt{4-x^2}$
+
+nên:
+$
+y^2=4-x^2.
+$
+
+Đường cong cắt trục hoành khi:
+$
+4-x^2=0
+\Longleftrightarrow x=\pm2.
+$
+
+Khi quay hình phẳng quanh trục $Ox$, thể tích khối tròn xoay là
+\[
+V=\pi\int_{-2}^{2}y^2\,dx.
+\]
+
+Do đó
+\[
+\begin{aligned}
+V
+&=\pi\int_{-2}^{2}(4-x^2)\,dx =\pi\left[4x-\frac{x^3}{3}\right]_{-2}^{2}\\[0.8em]
+&=\pi\left(8-\frac{8}{3}+8-\frac{8}{3}\right)
+=\pi\left(16-\frac{16}{3}\right)\\[0.8em]
+&=\frac{32\pi}{3}.
+\end{aligned}
+\]
+\newpage
+\textbf{Phần mềm sympy}
+
+\textit{Kết quả:} 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Ảnh chụp màn hình 2026-10-04 020738.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Ảnh chụp màn hình 2026-10-04 020618.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\begin{tcolorbox}[
+  colback=pink!3!white,      % Nền tím rất nhạt
+  colframe=violet!90!black,    % Viền & thanh tiêu đề tím đậm
+  coltitle=white,              % Chữ tiêu đề màu trắng
+  fonttitle=\bfseries,         % In đậm tiêu đề
+  arc=3pt,                     % Bo góc 3pt
+  title=\refstepcounter{dl}\textbf{Bài toán 3 Quay quanh trục $Oy$}
+]
+ Có một vật thể là hình tròn xoay có dạng giống như một
+cái ly như hình vẽ dưới đây: Người ta đo được đường kính của miệng ly là
+$4\,cm$ và chiều cao là $6\,cm$. Biết rằng thiết diện của chiếc ly cắt bởi
+mặt phẳng qua trục đối xứng là một parabol. Tính thể tích $V\,(cm^3)$
+của vật thể đã cho?
+\end{tcolorbox}
+
+\begin{figure} [h]
+    \centering
+    \includegraphics[width=0.3\textwidth]{image.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\begin{center}
+    \textbf{Lời giải:}
+\end{center}
+    
+
+Chọn hệ trục tọa độ như hình suy ra phương trình Parabol là:
+
+\[
+y=\frac{3x^2-12}{2}
+\Longrightarrow
+x^2=\frac{2y+12}{3}.
+\]
+
+Thể tích của vật là thể tích khối tròn xoay khi quay hình $(H)$
+giới hạn bởi các đường
+
+\[
+x=\sqrt{\frac{2y+12}{3}},\qquad x=0,\qquad y=-6,\qquad y=0
+\]
+
+quanh trục tung.
+
+Khi đó
+
+\[
+\begin{aligned}
+V
+&=\pi\int_{-6}^{0}\frac{2y+12}{3}\,dy\\[0.8em]
+&=\pi\left[
+\frac{1}{3}y^2+4y
+\right]_{-6}^{0}\\[0.8em]
+&=12\pi.
+\end{aligned}
+\]
+\vspace{0.5cm}
+
+\textbf{Phần mềm sympy}
+
+\textit{Kết quả:} 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.1\textwidth]{Bài toán/Bài toán 3.png}
+    \label{fig:placeholder}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{quay quanh oy.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\newpage
+
+\begin{tcolorbox}[
+  colback=pink!3!white,      % Nền tím rất nhạt
+  colframe=violet!90!black,    % Viền & thanh tiêu đề tím đậm
+  coltitle=white,              % Chữ tiêu đề màu trắng
+  fonttitle=\bfseries,         % In đậm tiêu đề
+  arc=3pt,                     % Bo góc 3pt
+  title=\refstepcounter{dl}\textbf{Bài toán 4 Thể tích khối tròn xoay tạo bởi miền giao nhau giữa hai đồ thị khi quay quanh trục $Ox$ }
+]
+ Gọi $D$ là hình phẳng giới hạn bởi hai đồ thị
+$
+y=x^2
+$
+và
+$
+y=4-x^2.
+$
+Tính thể tích $V$ của vật thể tròn xoay sinh ra khi quay hình phẳng $D$ quanh trục $Ox$.
+\end{tcolorbox}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Bài toán 4.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\textbf{Lời giải:}
+
+Ta tìm giao điểm của hai đồ thị:
+\[\begin{aligned}
+x^2&=4-x^2\\
+\Rightarrow 2x^2&=4\\
+\Rightarrow x&=\pm\sqrt{2}.
+\end{aligned}\]
+
+Trên đoạn $[-\sqrt{2},\sqrt{2}]$, ta có:
+$
+x^2\leq 4-x^2.
+$
+
+Khi quay miền $D$ quanh trục $Ox$, thể tích vật thể tròn xoay là
+\[
+V=\pi\int_{-\sqrt{2}}^{\sqrt{2}}
+\left[(4-x^2)^2-(x^2)^2\right]\,dx.
+\]
+
+Rút gọn biểu thức dưới dấu tích phân:
+\[
+(4-x^2)^2-x^4
+=16-8x^2.
+\]
+
+Do đó::
+\[
+\begin{aligned}
+V&=\pi\int_{-\sqrt{2}}^{\sqrt{2}}(16-8x^2)\,dx
+=\pi\left[16x-\frac{8x^3}{3}\right]_{-\sqrt{2}}^{\sqrt{2}}\\[0.8em]
+&=\frac{64\sqrt{2}\pi}{3}.
+\end{aligned}\]
+\textbf{Phần mềm sympy}
+
+\textit{Kết quả:} 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.1\textwidth]{Bài toán/Bài toán 4.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{image1.png}
+    \label{fig:placeholder}
+\end{figure}
+\chapter{ĐÁNH GIÁ - TỔNG KẾT}
+\section{Kết quả đạt được của đề tài}
+Sau quá trình nghiên cứu và thực hiện, đề tài đã hoàn thành các mục tiêu đặt ra ban đầu và thu được những kết quả cụ thể như sau:
+
+Về mặt lý thuyết (Chương 1 \& 2): Đã hệ thống hóa các công thức tính diện tích hình phẳng và thể tích khối tròn xoay theo chương trình Toán phổ thông. 
+
+
+Đồng thời, thiết lập được quy trình 3 bước cơ bản để giải quyết một bài toán Tích phân bằng Python:
+
+Khai báo biến ký hiệu (SymPy) -> Thiết lập hàm số -> Kết xuất đồ họa 3D (Matplotlib).
+
+Về mặt kỹ thuật và thời gian (Chương 3): Đề tài đã viết thành công các đoạn mã (code) để xử lý trực tiếp các bài toán thể tích. Thay vì giáo viên phải mất từ 5 đến 10 phút vẽ đồ thị không gian trên bảng, hoặc 15 đến 20 phút thao tác thủ công trên các phần mềm vẽ 3D truyền thống để chuẩn bị giáo án, các đoạn mã Python trong đề tài có khả năng kết xuất mô hình 3D (cho phép xoay 360 độ để quan sát) chỉ trong khoảng 3 đến 5 giây thời gian chạy chương trình. 
+
+Sự rút ngắn thời gian chuẩn bị học liệu này là một phản hồi trực tiếp và thiết thực để thích ứng với định mức thời lượng giảng dạy 4 tiết Toán/tuần hiện nay.
+\section{Hạn chế của đề tài}
+Dù đã xây dựng được nền tảng thuật toán, công trình này vẫn là một tiểu luận do sinh viên thực hiện nên không tránh khỏi 2 rào cản cốt lõi:
+
+Chưa có số liệu thực nghiệm sư phạm: Toàn bộ kết quả hiện nay chỉ dừng ở việc "mã nguồn chạy thành công trên máy tính". Đề tài chưa được đưa vào giảng dạy thử nghiệm tại bất kỳ lớp học phổ thông nào. Do đó, chúng em chưa có số liệu đo lường định lượng (như điểm kiểm tra đối chứng, hay kết quả khảo sát mức độ hứng thú) để khẳng định sự cải thiện về năng lực tư duy không gian của học sinh khi sử dụng công cụ này.
+
+Rào cản về giao diện người dùng: Sản phẩm hiện tại vẫn tồn tại dưới dạng các dòng lệnh (script code). Để sử dụng, giáo viên bắt buộc phải có kiến thức nền tảng về cài đặt môi trường Python hoặc biết thao tác trên Cmd. Điều này gây khó khăn lớn cho những giáo viên Toán không chuyên về công nghệ thông tin.
+
+\begin{thebibliography}{99}
+
+\bibitem{bgddt2024}
+Bộ Giáo dục và Đào tạo (2024). \textit{Toán 12 (Tập 2)}. Nhà xuất bản Giáo dục Việt Nam.
+
+\bibitem{phuc2023}
+Nguyễn Đăng Minh Phúc, Phạm Thị Mỹ Nhân (2023). Ứng dụng công nghệ in 3D hỗ trợ dạy học chủ đề ``Thể tích khối tròn xoay'' (Toán 12). Tạp chí Giáo dục, 23(23), 
+
+Truy xuất từ: \url{https://tcgd.tapchigiaoduc.edu.vn/index.php/tapchi/article/view/1112}
+
+\bibitem{sympy2023}
+SymPy Development Team (2023).SymPy: Python library for symbolic mathematics.
+
+Truy xuất từ: \url{https://docs.sympy.org/}
+
+\bibitem{hunter2007}
+Hunter, J. D. (2007). Matplotlib: A 2D graphics environment. Computing in Science \& Engineering, 9(3), 90--95.
+
+\bibitem{vanrossum2009}
+Van Rossum, G., \& Drake, F. L. (2009). Python 3 Reference Manual CreateSpace.
+
+\end{thebibliography}
+\end{document}
