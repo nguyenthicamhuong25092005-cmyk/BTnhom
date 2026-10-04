@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ứng dụng Sympy và Matplotlib 3D.html - HeyShow</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/black.min.css">
+    <style>
+        /* Chế độ thumbnail của gallery (?embed=1): ẩn điều khiển để ảnh thu nhỏ gọn mắt */
+        .heyshow-embed .reveal .controls,
+        .heyshow-embed .reveal .progress,
+        .heyshow-embed .slide-number { display: none !important; }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section-master>
+  <!-- Thiết lập chung cho tất cả slide dự án -->
+</section-master>
+
+<!-- SLIDE 1: TIÊU ĐỀ DỰ ÁN -->
+<section data-background-color="#e2f0d9">
+  <div style="padding: 40px; background: rgba(255, 255, 255, 0.7); border-radius: 16px; border: 1px solid rgba(255,255,255,0.9); box-shadow: 0 10px 15px -3px rgba(148,163,184,0.15); max-width: 900px; margin: 0 auto;">
+    <h1 style="font-size: 1.2em; color: #1e3a8a; font-family: 'Segoe UI', sans-serif; font-weight: 800; line-height: 1.3; margin-bottom: 15px;">Ứng Dụng Thư Viện SymPy & Matplotlib 3D Tính Thể Tích Bằng Tích Phân</h1>
+    <hr style="border: none; border-top: 4px solid #1e3a8a; width: 12%; margin: 0 auto 20px auto;">
+    <p style="color: #334155; font-size: 0.75em; line-height: 1.6; margin-bottom: 5px;"><strong>Nhóm 2:</strong> Phạm Phương Linh, Hoàng Ngọc Hùng, </p>
+    <p style="color: #334155; font-size: 0.75em; line-height: 1.6; margin-bottom: 5px;"><strong></strong>  Nguyễn Thị Cẩm Hương, Đặng Thanh Quý</p>
+    <p style="color: #1e3a8a; font-size: 0.75em; font-weight: 600;"><strong>Giảng viên hướng dẫn:</strong> TS. Nguyễn Đăng Minh Phúc</p>
+  </div>
+</section>
+
+<!-- SLIDE 2: PHẦN MỞ ĐẦU - TÍNH CẤP THIẾT -->
+<section data-background-color="#fef3c7">
+  <h2 style="color: #1e3a8a; font-size: 1.5em; font-weight: 700; margin-bottom: 20px;">Phần Mở Đầu: Lý Do Chọn Đề Tài</h2>
+  <div style="text-align: left; padding: 0 40px; font-size: 0.7em; color: #1e293b; line-height: 1.6;">
+    <div style="background: rgba(255, 255, 255, 0.7); padding: 12px; border-radius: 8px; border-left: 5px solid #ef4444; margin-bottom: 12px;">
+      💥 <strong>Mâu thuẫn phân phối thời gian:</strong> Quỹ thời gian Giải tích phổ thông rất hạn chế (4 tiết/tuần). Việc vẽ thủ công các đồ thị cong phức tạp (đường sin, parabol) ngốn mất 5 đến 10 phút trên bảng phấn, làm giảm thời gian luyện tập của học sinh.
+    </div>
+    <div style="background: rgba(255, 255, 255, 0.7); padding: 12px; border-radius: 8px; border-left: 5px solid #0284c7; margin-bottom: 12px;">
+      💡 <strong>Ý tưởng kế thừa:</strong> Lấy cảm hứng từ công trình ứng dụng công nghệ in 3D vật lý của hệ thống giảng dạy THPT. Đề tài cải tiến bằng giải pháp lập trình Python để sinh mô hình động ngay lập tức mà không mất thời gian chế tác vật lý.
+    </div>
+    <div style="background: rgba(255, 255, 255, 0.7); padding: 12px; border-radius: 8px; border-left: 5px solid #16a34a;">
+      🎯 <strong>Mục tiêu:</strong> Tự động hóa tính toán tích phân và kết xuất vật thể không gian 3D tương tác đa chiều (xoay 360 độ) hỗ trợ trực quan hóa bài giảng trực tiếp.
+    </div>
+  </div>
+</section>
+<!-- SLIDE 4: HỆ THỐNG CÔNG CỤ -->
+<section data-background-color="#fce7f3">
+  <h2 style="color: #1e3a8a; font-size: 1.6em; font-family: 'Segoe UI', sans-serif; font-weight: 700; margin-bottom: 25px;">Hệ Thống Thư Viện Công Cụ Cốt Lõi</h2>
+  <div style="text-align: left; padding: 0 30px; font-size: 0.7em; color: #1e293b; line-height: 1.6; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+    <div style="background: rgba(255, 255, 255, 0.8); padding: 15px; border-radius: 10px; border-top: 5px solid #0284c7; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+      <strong style="color: #0284c7; font-size: 1.1em; display: block; margin-bottom: 5px;">Ngôn ngữ Python</strong>
+      Nền tảng mã nguồn mở mạnh mẽ, cú pháp tối giản, hỗ trợ xây dựng thuật toán và thiết kế học liệu số linh hoạt.
+    </div>
+    <div style="background: rgba(255, 255, 255, 0.8); padding: 15px; border-radius: 10px; border-top: 5px solid #16a34a; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+      <strong style="color: #16a34a; font-size: 1.1em; display: block; margin-bottom: 5px;">Thư viện SymPy</strong>
+      Xử lý toán học ký hiệu: tự động tính nguyên hàm, tích phân xác định và tìm hoành độ giao điểm chính xác tuyệt đối.
+    </div>
+    <div style="background: rgba(255, 255, 255, 0.8); padding: 15px; border-radius: 10px; border-top: 5px solid #ea580c; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+      <strong style="color: #ea580c; font-size: 1.1em; display: block; margin-bottom: 5px;">Matplotlib 3D</strong>
+      Khởi tạo không gian Oxyz, dựng đường cong và lưới bề mặt, xuất mô hình trực quan cho phép xoay tự do 360 độ.
+    </div>
+  </div>
+</section><!-- SLIDE 3: CHƯƠNG 1 - CƠ SỞ TOÁN HỌC (CHỮ NHỎ GỌN - 2 HÀNG) -->
+<section data-background-color="#fce7f3">
+  <!-- Tiêu đề nhỏ gọn hơn -->
+  <h2 style="color: #1e3a8a; font-size: 1.1em; font-family: 'Segoe UI', sans-serif; font-weight: 700; margin-bottom: 15px; border-bottom: 2px solid rgba(30, 58, 138, 0.1); display: inline-block; padding-bottom: 5px;">Chương 1: Kiến Thức Chuẩn Bị</h2>
+  
+  <!-- Giảm cỡ chữ tổng thể của slide xuống 0.58em để chữ nhỏ và đẹp hơn -->
+  <div style="text-align: left; padding: 0 45px; font-size: 0.58em; color: #1e293b; line-height: 1.5; display: flex; flex-direction: column; gap: 12px;">
+    
+    <!-- HÀNG 1: ĐỊNH NGHĨA NGUYÊN HÀM -->
+    <div style="background: rgba(255, 255, 255, 0.85); padding: 12px 16px; border-radius: 4px 12px 12px 4px; border-left: 5px solid #0284c7; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);">
+      <strong style="color: #0284c7; font-size: 1.05em; display: block; margin-bottom: 4px;">🔹 Định nghĩa nguyên hàm</strong>
+      Hàm số $F(x)$ gọi là nguyên hàm của $f(x)$ trên $K$ nếu $F'(x) = f(x), \forall x \in K$. Kí hiệu họ nguyên hàm:
+      <div style="text-align: center; margin-top: 6px; font-weight: bold; color: #1e3a8a;">
+        $$\int f(x)dx = F(x) + C$$
+      </div>
+    </div>
+
+    <!-- HÀNG 2: ĐỊNH LÝ NEWTON-LEIBNIZ -->
+    <div style="background: rgba(255, 255, 255, 0.85); padding: 12px 16px; border-radius: 4px 12px 12px 4px; border-left: 5px solid #16a34a; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);">
+      <strong style="color: #16a34a; font-size: 1.05em; display: block; margin-bottom: 4px;">🔹 Định lý Newton-Leibniz</strong>
+      Nếu $f(x)$ liên tục trên đoạn $[a; b]$ và $F(x)$ là một nguyên hàm của nó thì tích phân xác định tính bằng hiệu số:
+      <div style="text-align: center; margin-top: 6px; font-weight: bold; color: #1e3a8a;">
+        $$\int_{a}^{b} f(x)dx = F(b) - F(a) = F(x) \bigg|_a^b$$
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- SLIDE 5: CHƯƠNG 1 - TỔNG QUAN SYMPY & MATPLOTLIB -->
+<section data-background-color="#e0f2fe">
+  <h2 style="color: #1f3a8a; font-size: 1em; font-weight: 700; margin-bottom: 20px;">Chương 1: Tổng Quan Khai Báo Thư Viện</h2>
+   
+  <!-- Giảm cỡ chữ tổng thể của slide xuống 0.58em để chữ nhỏ và đẹp hơn -->
+  <div style="text-align: left; padding: 0 45px; font-size: 0.58em; color: #1e293b; line-height: 1.5; display: flex; flex-direction: column; gap: 12px;">
+  
+    <div style="background: rgba(255, 255, 255, 0.85); padding: 12px 16px; border-radius: 4px 12px 12px 4px; border-left: 5px solid #0284c7; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);">
+      <strong style="color: #0284c7; font-size: 1.05em; display: block; margin-bottom: 4px;">💎 Khai báo toán ký hiệu (SymPy)</strong>
+     Cung cấp môi trường xử lý đại số nguyên bản. Khai báo biến và hằng số đặc biệt từ thư viện:
+      <div style="text-align: center; margin-top: 6px; font-weight: bold; color: #1e3a8a;">
+          <pre style="background: #f1f5f9; padding: 8px; border-radius: 6px; font-size:0.9em; margin-top: 5px; border-left: 4px solid #0284c7;"><code style="color: #0f172a;">import sympy as sp
+x, y = sp.symbols('x y')
+pi_val = sp.pi # Hằng số Pi
+inf_val = sp.oo #vô cùng</code></pre>
+      </div>
+    </div>
+
+    <!-- HÀNG 2: ĐỊNH LÝ NEWTON-LEIBNIZ -->
+    <div style="background: rgba(255, 255, 255, 0.85); padding: 12px 16px; border-radius: 4px 12px 12px 4px; border-left: 5px solid #16a34a; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);">
+      <strong style="color: #16a34a; font-size: 1.05em; display: block; margin-bottom: 4px;">📐 Thiết lập không gian 3D (Matplotlib)</strong>
+      Tạo lập lưới phẳng và hệ trục tọa độ Descartes không gian ba chiều Oxyz để hiển thị bề mặt vật thể:
+      <pre style="background: #f1f5f9; padding: 8px; border-radius: 6px; font-size: 0.9em; margin-top: 5px; border-left: 4px solid #16a34a;"><code style="color: #0f172a;">import matplotlib.pyplot as plt
+import numpy as np
+
+fig = plt.figure()
+ax = fig.add_subplot(projection='3d')
+X, Y = np.meshgrid(x_arr, y_arr)</code></pre>
+    </div>
+  </div>
+</section>
+
+<section data-background-color="#e2f0d9">
+      <h2 style="color: #1e3a8a; font-size: 1.4em; font-weight: 700; margin-bottom: 20px;">Chương 2:Ứng dụng Sympy để Tích Phân</h2>
+  <div style="text-align: left; padding: 0 40px; font-size: 0.7em; color: #1e293b; line-height: 1.6;">
+    <p style="margin-bottom: 10px; color: #475569;">Cú pháp hạt nhân để máy tính xử lý đại số tự động trong hệ thống phần mềm:</p>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+      <div style="background: white; padding: 10px; border-radius: 6px; border-left: 4px solid #16a34a;">
+        📌 <strong>Tính nguyên hàm bất định:</strong><br>
+        Cú pháp: <code style="color: #db2777; font-weight: bold;">sp.integrate(f, x)</code>
+      </div>
+      <div style="background: white; padding: 10px; border-radius: 6px; border-left: 4px solid #0284c7;">
+        📌 <strong>Tính tích phân xác định:</strong><br>
+        Cú pháp: <code style="color: #db2777; font-weight: bold;">sp.integrate(f, (x, a, b))</code>
+      </div>
+    </div>
+    <div style="background: rgba(255, 255, 255, 0.8); padding: 12px; border-radius: 8px; border: 1px solid rgba(30, 58, 138, 0.1);">
+      🔍 <strong>Cơ chế xử lý chuỗi động:</strong> Người dùng nhập hàm số tùy ý dưới dạng chuỗi văn bản (ví dụ: <code style="color: #ea580c;">"1/(3*x**(2/3)) + 1/sqrt(x)"</code>), hệ thống chuyển đổi thông qua hàm mã hóa <code style="color: #1e3a8a; font-weight: bold;">sp.sympify()</code> để đưa vào bộ xử lý, trả về giá trị phân số/pi tuyệt đối và số thập phân xấp xỉ (`float(I)`).
+    </div>
+  </div>
+</section>
+
+<section data-background-color="#e0f2fe">
+  <h2 style="color: #1e3a8a; font-size: 1.2em; font-weight: 700; margin-bottom: 20px;">Quy Trình xử lý</h2>
+  <div style="text-align: left; padding: 0 40px; font-size: 0.72em; color: #1e293b; line-height: 1.6;">
+    
+    <div style="margin-bottom: 12px; background: rgba(255, 255, 255, 0.7); padding: 12px; border-radius: 8px; border-left: 5px solid #1e3a8a;">
+      ️ <strong>Bước 1: Khai báo & Sympy hóa</strong> <br>
+      Khởi tạo biến ký hiệu độc lập. Hàm <code style="color: #e11d48; background: #f1f5f9; padding: 2px 6px; border-radius: 4px;">sp.sympify()</code> dịch chuỗi văn bản nhập từ bàn phím thành biểu thức toán học.
+    </div>
+    
+    <div style="margin-bottom: 12px; background: rgba(255, 255, 255, 0.7); padding: 12px; border-radius: 8px; border-left: 5px solid #1e3a8a;">
+      ️<strong>Bước 2: Giải toán đại số ký hiệu</strong> <br>
+      Tự động giải phương trình hoành độ giao điểm, lọc nghiệm thực <code style="color: #e11d48;">is_real</code> để xác định cận tích phân và tính thể tích chính xác.
+    </div>
+    
+    <div style="background: rgba(255, 255, 255, 0.7); padding: 12px; border-radius: 8px; border-left: 5px solid #1e3a8a;">
+      ️<strong>Bước 3: Chuyển đổi dữ liệu số & Dựng hình</strong> <br>
+      Dùng hàm <code style="color: #e11d48;">sp.lambdify()</code> chuyển biểu thức sang dạng mảng NumPy, gọi lệnh <code style="color: #0284c7;">plot_surface()</code> kết xuất khối 3D.
+    </div>
+  </div>
+</section>
+
+
+<section data-background-color="#e2f0d9">
+  <h2 style="color: #1e3a8a; font-size: 1em; font-weight: 700; margin-bottom: 20px;"> Chương 3: Dạng Toán Thể Tích tròn xoay </h2>
+  <div style="text-align: left; padding: 0 40px; font-size: 0.72em; color: #1e293b; line-height: 1.6;">
+    <div style="background: rgba(255, 255, 255, 0.8); padding: 12px; border-radius: 8px; margin-bottom: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+      🔷 <strong>Dạng 1: Khối tròn xoay quay quanh trục Ox</strong><br>
+      Vật thể giới hạn bởi đường  $y=f(x)$, trục hoành Ox, cận $[a, b]$ $\implies$ <span style="color: #0284c7; font-weight: 600;">$V = \pi \int_{a}^{b} [f(x)]^2 dx$</span>
+    </div>
+    <div style="background: rgba(255, 255, 255, 0.8); padding: 12px; border-radius: 8px; margin-bottom: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+      🔷 <strong>Dạng 2: Khối tròn xoay quay quanh trục Oy</strong><br>
+      Vật thể giới hạn bởi đường $x=g(y)$, trục tung Oy, cận $[c, d]$ $\implies$ <span style="color: #16a34a; font-weight: 600;">$V = \pi \int_{c}^{d} [g(y)]^2 dy$</span>
+    </div>
+    <div style="background: rgba(255, 255, 255, 0.8); padding: 12px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+      🔷 <strong>Dạng 3: Miền giao nhau giữa hai đồ thị quanh Ox</strong><br>
+      Hình phẳng giới hạn bởi hai đường cong $y=f(x)$ và $y=g(x)$ $\implies$ <span style="color: #ea580c; font-weight: 600;">$V = \pi \int_{a}^{b} |f^2(x) - g^2(x)| dx$</span>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE: CHƯƠNG 3 - THUẬT TOÁN MIỀN GIAO NHAU (CHỮ NHỎ - GỜ TRÁI) -->
+<section data-background-color="#fce7f3">
+  <h2 style="color: #1e3a8a; font-size: 1em; font-family: 'Segoe UI', sans-serif; font-weight: 700; margin-bottom: 15px; border-bottom: 2px solid rgba(30, 58, 138, 0.1); display: inline-block; padding-bottom: 5px;">Chương 3: Thuật Toán Tính Miền Giao Nhau Giữa Hai Đồ Thị</h2>
+  
+  <div style="text-align: left; padding: 0 45px; font-size: 0.6em; color: #1e293b; line-height: 1.5; display: flex; flex-direction: column; gap: 10px;">
+    
+    <!-- KHỐI 1: TỰ ĐỘNG QUÉT TÌM CẬN -->
+    <div style="background: rgba(255, 255, 255, 0.85); padding: 10px 14px; border-radius: 4px 12px 12px 4px; border-left: 5px solid #0284c7; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);">
+      <strong style="color: #0284c7; font-size: 1.05em; display: block; margin-bottom: 3px;">⚙️ Tự động quét tìm cận</strong>
+      Hệ thống tự động thiết lập phương trình hoành độ giao điểm $f(x) - g(x) = 0$ qua lệnh <code style="color: #db2777;">sp.solve()</code>. Vòng lặp kiểm tra thuộc tính <code style="color: #db2777;">val.is_real</code> để loại bỏ nghiệm phức, sắp xếp mảng thực tăng dần để nhận diện cận dưới $a$ và cận trên $b$.
+    </div>
+
+    <!-- KHỐI 2: CÔNG THỨC TÍNH TOÁN -->
+    <div style="background: rgba(255, 255, 255, 0.85); padding: 10px 14px; border-radius: 4px 12px 12px 4px; border-left: 5px solid #ea580c; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);">
+      <strong style="color: #ea580c; font-size: 1.05em; display: block; margin-bottom: 3px;">📐 Công thức tính toán</strong>
+      Lấy giá trị tuyệt đối của hiệu hai bình phương hàm số:
+      <div style="text-align: center; margin-top: 4px; font-weight: bold; color: #1e3a8a;">
+        $$V = \pi \int_{a}^{b} \big|f^2(x) - g^2(x)\big| dx $$
+      </div>
+    </div>
+
+    <!-- KHỐI 3: THUẬT TOÁN DỰNG HÌNH LỒNG LÕI -->
+    <div style="background: rgba(255, 255, 255, 0.85); padding: 10px 14px; border-radius: 4px 12px 12px 4px; border-left: 5px solid #16a34a; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);">
+      <strong style="color: #16a34a; font-size: 1.05em; display: block; margin-bottom: 3px;">🛡️ Thuật toán dựng hình lồng lõi</strong>
+      Hàm định vị phân định mặt ngoài $R_{outer} = \max(|f|, |g|)$ vẽ bằng bảng màu <code style="color: #1e3a8a;">plasma</code>, mặt trong lòng rỗng $R_{inner} = \min(|f|, |g|)$ vẽ bằng bảng màu <code style="color: #16a34a;">winter</code> để minh họa rõ nét vật thể tròn xoay bị rỗng ruột.
+    </div>
+
+  </div>
+</section>
+
+<!-- SLIDE: CHƯƠNG 4 - ĐÁNH GIÁ ĐỀ TÀI (CHỮ NHỎ - GỜ TRÁI) -->
+<section data-background-color="#e0f2fe">
+  <h2 style="color: #1e3a8a; font-size: 0.9em; font-family: 'Segoe UI', sans-serif; font-weight: 700; margin-bottom: 15px; border-bottom: 2px solid rgba(30, 58, 138, 0.1); display: inline-block; padding-bottom: 5px;">Chương 4: Đánh Giá & Tổng kết </h2>
+  
+  <div style="text-align: left; padding: 0 45px; font-size: 0.56em; color: #1e293b; line-height: 1.5; display: flex; flex-direction: column; gap: 10px;">
+    
+    <!-- KHỐI 1: KẾT QUẢ ĐẠT ĐƯỢC -->
+    <div style="background: rgba(255, 255, 255, 0.85); padding: 10px 14px; border-radius: 4px 12px 12px 4px; border-left: 5px solid #16a34a; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);">
+      <strong style="color: #16a34a; font-size: 1.05em; display: block; margin-bottom: 4px;">🏆 Kết quả đạt được</strong>
+      • <strong>Tối ưu hóa thời gian:</strong> Giảm thời gian chuẩn bị và kết xuất học liệu 3D xuống còn 3 đến 5 giây (so với 15-20 phút dựng hình thủ công truyền thống).<br>
+      • <strong>Mô phỏng đa chiều:</strong> Mô hình 3D động sắc nét, trực quan, hỗ trợ xoay tự do giúp học sinh bứt phá tư duy không gian hình học.
+    </div>
+
+    <div style="background: rgba(255, 255, 255, 0.85); padding: 10px 14px; border-radius: 4px 12px 12px 4px; border-left: 5px solid #ef4444; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);">
+      <strong style="color: #b91c1c; font-size: 1.05em; display: block; margin-bottom: 4px;">⚠️ Hạn chế </strong>
+      • <strong>Hạn chế:</strong> Tiểu luận mang tính lý thuyết phần mềm, hoàn toàn chưa có số liệu thực nghiệm sư phạm thực tế dạy học phổ thông. Giao diện dòng lệnh (Terminal) còn thô.<br>
+      • <strong>Phát triển:</strong> Nghiên cứu lập trình đóng gói ứng dụng có giao diện đồ họa nút bấm (GUI trực quan bằng Tkinter/PyQt). Triển khai dạy học thực tế để đo lường.
+    </div>
+
+  </div>
+</section>
+<!-- SLIDE: TÀI LIỆU THAM KHẢO (CHỮ NHỎ - GỜ TRÁI) -->
+<section data-background-color="#e2f0d9">
+  <h2 style="color: #1e3a8a; font-size: 1.3em; font-family: 'Segoe UI', sans-serif; font-weight: 700; margin-bottom: 15px; border-bottom: 2px solid rgba(30, 58, 138, 0.1); display: inline-block; padding-bottom: 5px;">Tài Liệu Tham Khảo</h2>
+  
+  <div style="text-align: left; padding: 0 45px; font-size: 0.54em; color: #1e293b; line-height: 1.5; display: flex; flex-direction: column; gap: 8px;">
+    
+    <!-- TÀI LIỆU 1 -->
+    <div style="background: rgba(255, 255, 255, 0.85); padding: 8px 14px; border-radius: 4px 12px 12px 4px; border-left: 5px solid #0284c7; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);">
+      <span style="color: #0284c7; font-weight: bold; margin-right: 5px;">[1]</span> Bộ Giáo dục và Đào tạo (2024). <em>Toán 12 (Tập 2)</em>. Nhà xuất bản Giáo dục Việt Nam.
+    </div>
+
+    <!-- TÀI LIỆU 2 -->
+    <div style="background: rgba(255, 255, 255, 0.85); padding: 8px 14px; border-radius: 4px 12px 12px 4px; border-left: 5px solid #16a34a; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);">
+      <span style="color: #16a34a; font-weight: bold; margin-right: 5px;">[2]</span> Nguyễn Đăng Minh Phúc, Phạm Thị Mỹ Nhân (2023). Ứng dụng công nghệ in 3D hỗ trợ dạy học chủ đề “Thể tích khối tròn xoay” (Toán 12). <em>Tạp chí Giáo dục</em>, 23(23).
+    </div>
+
+    <!-- TÀI LIỆU 3 -->
+    <div style="background: rgba(255, 255, 255, 0.85); padding: 8px 14px; border-radius: 4px 12px 12px 4px; border-left: 5px solid #ea580c; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);">
+      <span style="color: #ea580c; font-weight: bold; margin-right: 5px;">[3]</span> SymPy Development Team (2023). <em>SymPy: Python library for symbolic mathematics</em>. Truy xuất từ https://sympy.org.
+    </div>
+
+    <!-- TÀI LIỆU 4 -->
+    <div style="background: rgba(255, 255, 255, 0.85); padding: 8px 14px; border-radius: 4px 12px 12px 4px; border-left: 5px solid #db2777; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);">
+      <span style="color: #db2777; font-weight: bold; margin-right: 5px;">[4]</span> Hunter, J. D. (2007). Matplotlib: A 2D graphics environment. <em>Computing in Science & Engineering</em>, 9(3), 90–95.
+    </div>
+
+    <!-- TÀI LIỆU 5 -->
+    <div style="background: rgba(255, 255, 255, 0.85); padding: 8px 14px; border-radius: 4px 12px 12px 4px; border-left: 5px solid #14b8a6; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);">
+      <span style="color: #14b8a6; font-weight: bold; margin-right: 5px;">[5]</span> Van Rossum, G., & Drake, F. L. (2009). <em>Python 3 Reference Manual</em>. CreateSpace.
+    </div>
+
+  </div>
+</section>
+
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/math/math.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (new URLSearchParams(location.search).has('embed')) {
+                document.documentElement.classList.add('heyshow-embed');
+            }
+
+            // Xử lý thẻ section-master
+            const masters = document.querySelectorAll('section-master');
+            let masterContent = '';
+            masters.forEach(m => {
+                masterContent += m.innerHTML;
+                m.remove();
+            });
+
+            if (masterContent) {
+                const sections = document.querySelectorAll('.reveal .slides section');
+                sections.forEach(sec => {
+                    // Chỉ chèn vào các section không chứa section con (leaf section)
+                    if (sec.querySelectorAll('section').length === 0) {
+                        sec.insertAdjacentHTML('afterbegin', masterContent);
+                    }
+                });
+            }
+
+            Reveal.initialize({
+                hash: true,
+                slideNumber: true,
+                plugins: [ RevealMath.KaTeX ] // Hỗ trợ công thức Toán học
+            });
+        });
+    </script>
+</body>
+</html>
