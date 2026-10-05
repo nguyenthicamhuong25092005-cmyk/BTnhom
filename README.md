@@ -7,11 +7,14 @@
 ## 📌 1. Thông tin chung
 
 *   **Tên đề tài:** Ứng dụng thư viện SymPy và Matplotlib 3D để tính thể tích bằng tích phân và trực quan hoá hình ảnh.
-*   **Cơ quan ban hành:** Trường Đại học Sư phạm Huế — Khoa Toán học.
 *   **Nhóm sinh viên thực hiện:** Phạm Phương Linh, Hoàng Ngọc Hùng, Nguyễn Thị Cẩm Hương, Đặng Thanh Quý.
 *   **Giảng viên hướng dẫn:** TS. Nguyễn Đăng Minh Phúc.
 *   **Thời gian hoàn thành:** Tháng 10/2026.
-*   **Định dạng đầu ra:** file PDF;  FILE .PY
+*   **Định dạng đầu ra:**
+*   - file PDF hoàn chỉnh: gồm 39 trang
+    -  file readme.md giới thiệu tổng quan về dự án
+    -  file mã nguồn trong sympy và matplotlib gồm các file: quay_quanh_Ox.py; quay_quanh_Oy.py; 2ham_quanh_Ox.py; tinh_nguyen_ham_tp.py;dư_an.py
+    -  file mã latex: code trong latex.txt
 *   **Link overleaf:** https://www.overleaf.com/read/hsvhfvnwvhft#751c50
 
 ---
@@ -48,13 +51,13 @@
 ### 🌀 Chương 3: Ứng dụng SymPy & Matplotlib 3D trong tính thể tích
 Giải quyết khép kín ba dạng toán tích phân trọng tâm kèm theo sơ đồ thuật toán tự động hóa:
 1.  **Khối tròn xoay quay quanh trục Ox:** 
-    *   *Công thức:* $V = pi \int_{a}^{b} [f(x)]^2\, dx$.
+    *   *Công thức:* $V = \pi \int_{a}^{b} [f(x)]^2 dx$.
     *   *Lệnh thực thi:* `V = sp.pi * sp.integrate(f**2, (x, a, b))`.
 2.  **Khối tròn xoay quay quanh trục Oy:**
-    *   *Công thức:* $V = pi \int_{c}^{d} [g(y)]^2\, dy$. 
+    *   *Công thức:* $V = \pi \int_{c}^{d} [g(y)]^2 dy$. 
     *   *Lệnh thực thi:* `V = sp.pi * sp.integrate(g**2, (y, c, d))`.
 3.  **Miền tạo bởi giao nhau giữa hai đồ thị (\(y=f(x)\) và \(y=g(x)\)) quanh Ox:**
-    *   *Công thức:* $V = pi \int_{a}^{b} \vert{}f^2(x) - g^2(x)\vert{}, dx$.
+    *   *Công thức:* $V = \pi \int_{a}^{b}|f^2(x) - g^2(x)| dx$.
     *   *Cơ chế:* Sử dụng `sp.solve()` để quét tìm giao điểm, lọc nghiệm thực an toàn qua thuộc tính `.is_real`, phân định bán kính trong/ngoài bằng hàm `maximum/minimum` để hiển thị vật thể rỗng lòng.
 
 ### 📊 Chương 4: Đánh giá — Tổng kết
@@ -78,8 +81,31 @@ pip install numpy matplotlib sympy
 ```bash
 python main.py
 ```
+## 5. Thời gian thực hiện đề tài:
+🪷 Tuần 1:
 
-## 📋 5. Danh mục tài liệu tham khảo chính
+- Thu thập tài liệu tham khảo, sách giáo khoa, giáo trình và các tài liệu nghiên cứu liên quan đến Tích phân và cách ứng dụng CNTT vào dạy học Toán.
+
+- Tiến hành viết phần mở đầu; vạch khung ý tưởng và xây dựng đề cương chi tiết cho các Chương 1, Chương 2 và Chương 3.
+
+- Tìm hiểu cách ứng dụng thư viện SymPy (tính tích phân) và Matplotlib 3D (dựng mô hình khối tròn xoay) trong Python.
+
+🪷 Tuần 2:
+
+- Định dạng mục lục tự động và thiết lập danh mục tài liệu tham khảo theo chuẩn.
+
+- Hoàn thiện và rà soát lại nội dung chi tiết các chương.
+
+- Dựa vào tài liệu tham khảo để tìm, chọn lọc và giải bài tập minh họa của từng dạng bài tính thể tích bằng tích phân.
+
+🪷 Tuần 3:
+
+- Viết mã nguồn Python kết hợp SymPy và Matplotlib 3D để giải và trực quan hóa các bài tập minh họa đã chọn.
+
+- Đánh giá hiệu quả trực quan của mô hình 3D tương tác động trong việc hỗ trợ tư duy không gian cho học sinh (chương 4).
+
+- Rà soát toàn bộ văn bản, chỉnh sửa lỗi trình bày, hoàn thiện báo cáo tổng kết và chuẩn bị nghiệm thu đề tài. 
+## 📋 6. Danh mục tài liệu tham khảo chính
 
 1.  Bộ Giáo dục và Đào tạo (2024). *Toán 12 (Tập 2)*. Nhà xuất bản Giáo dục Việt Nam.
 2.  Nguyễn Đăng Minh Phúc, Phạm Thị Mỹ Nhân (2023). Ứng dụng công nghệ in 3D hỗ trợ dạy học chủ đề “Thể tích khối tròn xoay” (Toán 12). *Tạp chí Giáo dục*, 23(23). Truy xuất từ: https://tapchigiaoduc.edu.vn
