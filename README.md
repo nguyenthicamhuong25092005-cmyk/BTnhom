@@ -48,13 +48,13 @@
 ### 🌀 Chương 3: Ứng dụng SymPy & Matplotlib 3D trong tính thể tích
 Giải quyết khép kín ba dạng toán tích phân trọng tâm kèm theo sơ đồ thuật toán tự động hóa:
 1.  **Khối tròn xoay quay quanh trục Ox:** 
-    *   *Công thức:* \(V = \pi \int_{a}^{b} [f(x)]^2 dx\). adsdkjfgjfgkdfgdfgfg
+    *   *Công thức:* $V = pi \int_{a}^{b} [f(x)]^2\, dx$.
     *   *Lệnh thực thi:* `V = sp.pi * sp.integrate(f**2, (x, a, b))`.
 2.  **Khối tròn xoay quay quanh trục Oy:**
-    *   *Công thức:* \(V = \pi \int_{c}^{d} [g(y)]^2 dy\). 
+    *   *Công thức:* $V = pi \int_{c}^{d} [g(y)]^2\, dy$. 
     *   *Lệnh thực thi:* `V = sp.pi * sp.integrate(g**2, (y, c, d))`.
 3.  **Miền tạo bởi giao nhau giữa hai đồ thị (\(y=f(x)\) và \(y=g(x)\)) quanh Ox:**
-    *   *Công thức:* \(V = \pi \int_{a}^{b} \vert{}f^2(x) - g^2(x)\vert{} dx\).
+    *   *Công thức:* $V = pi \int_{a}^{b} \vert{}f^2(x) - g^2(x)\vert{}, dx$.
     *   *Cơ chế:* Sử dụng `sp.solve()` để quét tìm giao điểm, lọc nghiệm thực an toàn qua thuộc tính `.is_real`, phân định bán kính trong/ngoài bằng hàm `maximum/minimum` để hiển thị vật thể rỗng lòng.
 
 ### 📊 Chương 4: Đánh giá — Tổng kết
