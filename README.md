@@ -48,7 +48,7 @@
 ### 🌀 Chương 3: Ứng dụng SymPy & Matplotlib 3D trong tính thể tích
 Giải quyết khép kín ba dạng toán tích phân trọng tâm kèm theo sơ đồ thuật toán tự động hóa:
 1.  **Khối tròn xoay quay quanh trục Ox:** 
-    *   *Công thức:* \(V = \pi \int_{a}^{b} [f(x)]^2 dx\). 
+    *   *Công thức:* \(V = \pi \int_{a}^{b} [f(x)]^2 dx\). adsdkjfgjfgkdfgdfgfg
     *   *Lệnh thực thi:* `V = sp.pi * sp.integrate(f**2, (x, a, b))`.
 2.  **Khối tròn xoay quay quanh trục Oy:**
     *   *Công thức:* \(V = \pi \int_{c}^{d} [g(y)]^2 dy\). 
